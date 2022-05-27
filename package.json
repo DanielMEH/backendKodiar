@@ -1,0 +1,17 @@
+{
+  "name": "kodiarbackend",
+  "version": "0.1.0",
+  "description": "kodiar",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "------------",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16",
+    "sqlite3": "^5.0.8"
+  }
+}
