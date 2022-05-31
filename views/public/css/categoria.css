@@ -1,0 +1,142 @@
+.container_categoria{
+
+    
+    box-shadow: 0px 0px 15px .6px rgb(230, 230, 230);
+    padding: 2rem;
+    border-radius: 1rem;
+    z-index: 200;
+    position: relative;
+    backdrop-filter: blur(10px);
+    max-width: 1400px;
+    margin: 5rem auto;
+}
+
+.contaner_min{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 2rem;
+}
+.menu_categoria {
+    display:flex;
+    flex-direction: column;
+    justify-content:flex-end;
+    border-radius:8px;
+    overflow: hidden;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    -ms-border-radius:8px;
+    -o-border-radius:8px;
+    height:12rem;
+}
+
+.list > li > .cate_active::before{
+    
+    background:var(--color-text);
+    content: "";
+    width: 100%;
+    height: 0.187rem;
+    border-radius: 2rem;
+    bottom: 0;
+    position: absolute;
+    transition: all .2s ease-in;
+   
+ }
+
+
+.despensa{
+    background-image: linear-gradient(90deg,#74747463,#75757565),url("../categorias/image/2011.i003.013_shopping\ bag\ basket\ zero\ waste\ eco\ illustration.jpg");
+    background-size: cover;
+
+}
+
+.bebes{
+    background-image: linear-gradient(90deg,#74747463,#75757565),url("../categorias/image/2112.q712.005.F.m009.c5.toy\ store\ composition\ set\ flat.jpg");
+    background-size: cover;
+    background-position: center center;
+
+}
+.mascotas{
+    background-image: linear-gradient(90deg,#74747463,#75757565),url("../categorias/image/mascotas.jpg");
+    background-size: cover;
+    background-position: center center;
+}
+
+.bebidas{
+    background-image: linear-gradient(90deg,#74747463,#75757565),url("../categorias/image/bebivas.jpg");
+    background-size: cover;
+    background-position: center center;
+}
+
+.cuidado_personal{
+background-image: linear-gradient(90deg,#74747463,#75757565),url("../categorias/image/cuidadopersonal.jpg");
+background-size: cover;
+background-position: center center;
+}
+
+.limpieza{
+    background-image: linear-gradient(90deg,#74747463,#75757565),url("../categorias/image/limpieza.jpg");
+background-size: cover;
+background-position: center center;
+}
+
+.title_main{
+    text-align: center;
+    font-weight: bold;
+    font-size: 2.99rem;
+    letter-spacing: 0.004rem;
+    line-height: 1;
+    font-family: sans-serif;
+    margin-bottom: 1rem ;
+    color: #1aa7f8;
+    padding-bottom:1rem;
+    border-bottom: 2px solid rgb(173, 173, 173);
+}
+.categoria h2{
+    padding: 1rem;
+    color: white;
+
+}
+.link_product{
+    padding: 0.10rem;
+    background: #1aa7f8;
+    transition: all .2s ease-out;
+}
+.link_product a i{
+    
+    float: right;
+    margin-right: 0.20rem;
+  
+}
+
+.link_product a{
+    background: #1aa7f8;
+    width: 100%;
+    display: block;
+    padding: 0.50rem 0rem;
+    text-decoration: none;
+    color: white;
+    transition: all .2s ease-out;
+}
+.link_product a:hover{
+
+    background: #3fb7fd;
+}
+.link_product:hover{
+
+    background: #3fb7fd;
+}
+
+.plus i{
+
+    position: absolute;
+    box-shadow: 0px 0px 4px 2px #ccc;
+    padding: 10px;
+    border-radius: 100%;
+    font-size: 2em;
+    color: rgb(61, 61, 61);
+    bottom: 1rem;
+    right: 1rem;
+    margin: 1rem;
+    cursor: pointer;
+
+}

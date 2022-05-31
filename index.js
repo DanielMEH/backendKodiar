@@ -1,18 +1,26 @@
-import express from "express";
-const app = express();
-import router from "./routes.js"
-import {db} from "./db/conexion.js"
+const express = require("express");
+const path = require("path");
+const app = express()
 const port = 3000;
+const sqlite3 = require("sqlite3")
+const db = new sqlite3.Database("./db/users.db")
 
 // ? Settigs
-app.set("port", process.env.PORT || port);
 
 app.use(express.json())
-app.use(express.urlencoded({extended: false}))
-console.log(db)
-app.use(router)
+app.use(express.urlencoded({extended: true}))
+app.use(express.static(path.join(__dirname, "/public")))
 
-// ? Listening Server
-app.listen(app.get("port"), (req,res) => {
-     console.log("Listening on port",app.get("port"))
+app.set("view engine","pug")
+
+app.get("/",(req,res)=>{
+
+     res.render("register")
+
+})
+
+console.log(db)
+// ? Listening Server3
+app.listen(port, (req,res) => {
+     console.log("Listening on port",port)
 })

@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+:root{
+
+    --color-text:#1aa7f8;
+}
+body{
+    background: #f0efef;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+.container .title{
+    font-size: 2rem;
+    margin: 0 2rem;
+    font-weight: bold;
+    padding: 6px;
+}
+
+.container{
+    position: relative;
+    background-color:rgba(255, 255, 255, 0.457);
+    backdrop-filter: blur(2px);
+    z-index: 200;
+}
+
+.container_hero{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.nav_link{
+    display: flex;
+    align-items: center;
+
+}
+.list{
+    display:flex;
+    align-items: center;
+
+}
+.list >li {
+    list-style: none;
+    margin-right: 1rem;
+}
+.list > li > a{
+    text-decoration: none;
+    position: relative;
+    margin: 0.40rem 0.50em;
+    padding: 0.50rem 0.70rem;
+    color: var(--color-text);
+}
+.list > li > a.active{
+    width: 100%;
+    color: var(--color-text);
+}
+.list > li > a::before{
+    
+   background:var(--color-text);
+   content: "";
+   width: 0%;
+   height: 0.187rem;
+   border-radius: 2rem;
+   bottom: 0;
+   position: absolute;
+   transition: all .2s ease-in;
+  
+}
+.list > li > a:hover::before{
+    width: 100%;
+}
+.login-box{
+max-width: 500px;
+    width: 45%;
+    background: rgb(247, 247, 252);
+    text-align: center;
+    margin: 10% auto;
+    border-radius:10px;
+    overflow: hidden;
+    padding:0 0 2rem;
+    box-shadow: 0px 0px 7px 8px rgb(231, 231, 231);
+
+
+}
+.login-title{
+    background:#1aa7f8;
+    padding: 15px 0px;
+    width: 100%;
+    display: block;
+    color:white;
+    border-color:10px solid black;
+    letter-spacing:0.10rem;
+}
+  .input-field {
+    background-color: #f0f0f0;
+    margin: 10px 0;
+    background-color:white;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    position: relative;
+    margin: 2rem 1rem;
+    border:none;
+  }
+  .outline{
+      outline:none;
+  }
+  .input-field i {
+    text-align: center;
+    line-height: 55px;
+    color: #acacac;
+  }
+  
+  .input-field input {
+    background: none;
+    border: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+    outline: none;
+
+  }
+  .login-button{
+      background:#1aa7f8;
+      border-color: #1aa7f8;
+      border-radius:5px;
+      color:rgb(255, 255, 255);
+      font-weight:bold;
+      margin:0 0 15px;
+      padding:7px;
+      letter-spacing:0.10rem;
+      cursor: pointer;
+
+  }
+  .login-button:hover{
+    
+      opacity: 0.90;
+  }
+
+  
+ 

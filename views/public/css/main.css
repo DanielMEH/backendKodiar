@@ -1,0 +1,182 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+.container_main{
+    display: grid;
+    grid-template-columns: 450px auto;
+    max-width: 1400px;
+    margin: 3rem auto;
+    gap: 2rem;
+    
+}
+
+.registro_product h2{
+    
+    background: #1aa7f8;
+    color: white;
+    text-align: center;
+    padding: 0.620rem;
+}
+
+.registro_product{
+    border: 1px solid #1aa7f8;
+    background: white;
+    border-radius: 7px;
+    overflow: hidden;
+    box-shadow: 0px 0px 10px .7px rgb(202, 202, 202);
+}
+
+.boxs{
+    display: flex;
+    justify-content: space-between;
+   
+    margin: 0 auto;
+    
+}
+
+.one_box{
+    margin: 1rem;
+    margin-bottom: 3rem;
+}
+
+.three_box{
+    margin: 1rem;
+}
+
+.select{
+    width: 100%;
+}
+
+.label-select{
+    display: block;
+    margin-bottom: 4px;
+}
+
+.input_code{
+    padding: 3px;
+    border: 1px solid rgb(79, 79, 79);
+    border-radius: 4px;
+    outline: none;
+    font-size: 15px;
+
+}
+.input_code:focus{
+    border:1px solid #1aa7f8;
+    box-shadow: 0px 0px 2px 0.4px #1aa7f8;
+}
+
+.registro{
+    border: 1px solid #929191;
+    margin: 5px;
+  
+    border-radius: 3px;
+    box-shadow: inset  0px 0px 2px 0.4px rgb(186, 186, 186) ;
+    position: relative;
+    
+}
+
+.name{
+    display: flex;
+    align-items: center;
+    margin: 40px 10px 20px 10px;
+    
+}
+
+.input_co{
+    width: 100%;
+    display: block;
+    margin: 0px 10px;
+    outline: none;
+    border: 1px solid rgb(79, 79, 79);
+    border-radius: 4px;
+    padding: 3px;
+    font-size: 15px;
+
+}
+
+.input_co:focus{
+    border:1px solid #1aa7f8;
+    box-shadow: 0px 0px 2px 0.4px #1aa7f8;
+   
+
+}
+
+.infoprodct{
+    display: flex;
+    flex-direction: column;
+    gap: 0.43rem;
+}
+.infotwo{
+  
+    width: 100%;
+    margin: 2px;
+}
+.infoone{
+    display: flex;
+   
+    align-items: center;
+    margin: 10px;
+    
+}
+.tato{
+    width: 100%;
+    display: block;
+    margin: 3px auto;
+
+}
+
+.descripcion{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+
+}
+
+.register_date{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1rem;
+    align-items: center;
+}
+
+.green_botton{
+    background: #1aa7f8 ;
+    border: 1px solid #1aa7f8 ;
+    padding: 6px;
+    color: white;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: 0.2s ease-out;
+}
+
+.green_botton:hover{
+    background: #0094e9 ;
+}
+
+.red_botton{
+    background: red ;
+    border: 1px solid red ;
+    padding: 6px;
+    color: white;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: 0.2s ease-out;
+}
+
+.red_botton:hover{
+    background: 
+    rgb(217, 46, 46) ;
+}
+
+.title_product{
+    background: rgb(255, 255, 255);
+    position: absolute;
+    top: -0.88rem;
+    left: 1rem;
+    padding: 1px 4px;
+    display: block;
+
+}
+

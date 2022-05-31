@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+
+    --color-text:#1aa7f8;
+}
+body{
+    background: #f0f2f5;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+
+.container{
+    position: relative;
+    background-color:rgba(255, 255, 255, 0.457);
+    backdrop-filter: blur(2px);
+    z-index: 200;
+}
+
+.container_hero{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.67rem;
+}
+.nav_link{
+    display: flex;
+    align-items: center;
+
+}
+.list{
+    display:flex;
+    align-items: center;
+
+}
+.list >li {
+    list-style: none;
+    margin-right: 1rem;
+}
+.list > li > a{
+    text-decoration: none;
+    position: relative;
+    margin: 0.40rem 0.50em;
+    padding: 0.50rem 0.70rem;
+    color: var(--color-text);
+}
+.list > li > a.active{
+    width: 100%;
+    color: var(--color-text);
+}
+.list > li > a::before{
+    
+   background:var(--color-text);
+   content: "";
+   width: 0%;
+   height: 0.187rem;
+   border-radius: 2rem;
+   bottom: 0;
+   position: absolute;
+   transition: all .2s ease-in;
+  
+}
+.list > li > .agre_active::before{
+    
+    background:var(--color-text);
+    content: "";
+    width: 100%;
+    height: 0.187rem;
+    border-radius: 2rem;
+    bottom: 0;
+    position: absolute;
+    transition: all .2s ease-in;
+   
+ }
+.list > li > a:hover::before{
+    width: 100%;
+}
+.container .title{
+    font-size: 2rem;
+    margin: 0 2rem;
+    font-weight: bold;
+}
+.notificacion{
+  
+    padding:2px;
+    padding: 0.004;
+    border-radius: 4rem;
+    cursor: pointer;
+    position: relative;
+}
+.notificacion::before{
+    content:"3";
+    background:red;
+    padding: 1px 00.3rem;
+    border-radius: 3rem;
+    position: absolute;
+    left: 1rem;
+    top: -0.09rem;
+    color: #fff;
+    font-size: 13px;
+    border: 1px solid #fff;
+}
+.notificacion i{
+
+    color: #434444;
+    font-size: 1.3rem;
+    display: block;
+    margin: 2px;
+   
+}
+.caja-principal{
+    border: 1px solid #1aa7f8;
+    max-width: 1300px;
+    margin: 3rem auto;
+    display: grid;
+    grid-template-columns: 400px auto;
+    background: #1aa7f8c6;
+    box-shadow: 0px 0px 10px .7px rgb(153, 147, 147);
+    border-radius: 4px;
+}
+.caja2{
+    border: 2px solid #1aa7f8;
+    background: white;
+    border-radius: 7px;
+    overflow: hidden;
+    
+    margin: 8px;
+}
+.title-perfil{
+    padding:20px;
+    text-align:center;
+    border-bottom:2px solid #1aa7f8 ;
+    
+}
+.imagen{
+   width:100%;
+  border-bottom:2px solid #1aa7f8;
+   display:flex;
+   flex-direction: column;
+   justify-content: center;
+
+}
+.imagen2{
+    width: 70%;
+    text-align: center;
+    display: block;
+    padding: 4px;
+    margin: 0 auto;
+}
+.nombre{
+    text-align: center;
+}
+.text-datos{
+    padding:20px;
+    text-align:center;
+   
+}
+.text-datos a{
+    text-decoration: none;
+    color:black
+}
+.text-datos:hover{
+    background: #1aa7f8;
+}
+
+.datos2{
+    padding:20px;
+    text-align:center;
+   
+}
+.datos2 a{
+    text-decoration: none;
+    color: black;
+}
+.caja3{
+    border: 2px solid #1aa7f8;
+    background: white;
+    border-radius: 7px;
+    overflow: hidden;
+    margin: 8px;
+    padding: 10px;
+  
+}
+.info{
+    padding:20px;
+    text-align:center;
+    border-bottom:2px solid #1aa7f8 ;
+}
+/* .cajas{
+    padding:15px 50px;
+} */
+.nombre-cajas{
+    padding:15px 0px;
+}
+.rrrr{
+    display: flex;
+    justify-content:space-around;
+    margin:40px
+
+}
+.caja-des{
+    width:300px;
+    height:150px
+}
+.nombre-des{
+    padding:15px 0px;
+}
