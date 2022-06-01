@@ -4,19 +4,49 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        link(rel="stylesheet", href='css/style.css' type='text/css')
+        link(rel="stylesheet", href='css/style.css' type="text/html")
+        script(src="https://kit.fontawesome.com/fa98a09714.js" crossorigin="anonymous")
         title Register
     style 
-       include public/css/login.css
+       include css/login.css
     body 
 
-    block header.container 
-    div.container_hero
-    div.title Kodiar
-    div.navegate
-    nav.nav_link
-    ul.list
-    li
-     a(href="/") INICIAR SESION
-    li
-     a(href="registro.html") REGISTRARSE
+    header.container 
+        div.container_hero
+            div.title Kodiar
+            div.navegate
+                nav.nav_link
+                    ul.list
+                        li: a(href="/") INICIAR SESION
+                        li: a(href="registro.html") REGISTRARSE
+    form(action="/" class="login-box")
+        h2.login-title REGISTRATE
+        div.input-field
+          i.fa.fa-user
+          input(class="outline" type="text" name="nombre" placeholder="Usuario")
+        div.input-field 
+          i.fas.fa-envelope
+          input(class="outline" type="email" name="email" placeholder="Email")
+        div.input-field 
+          i.fas.fa-lock
+          input(class="outline" type="password" name="contraseña" placeholder="Contraseña")
+        input(class="login-button" type="submit" class="btn" value="REGISTRATE")
+
+    //- <form class="login-box" >
+        //-     <input class="login-button" type="submit" class="btn" value="REGISTRATE" />
+
+    //-     <h2 class="login-title">REGISTRATE</h2>
+    //-     <div class="input-field">
+    //-       <i class="fas fa-user"></i>
+    //-       <input class="outline" type="text"name="nombre" placeholder="Usuario" />
+    //-     </div>
+    //-     <div class="input-field">
+    //-       <i class="fas fa-envelope"></i>
+    //-       <input class="outline" type="email" name="email" placeholder="Email" />
+    //-     </div>
+    //-     <div class="input-field">
+    //-       <i class="fas fa-lock"></i>
+    //-       <input class="outline" type="password" name="contraseña" placeholder="Contraseña" />
+    //-     </div>
+    //-     <input class="login-button" type="submit" class="btn" value="REGISTRATE" />
+    //-   </form>
