@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/fa98a09714.js" crossorigin="anonymous"></script>
+    
+    <title>KODIAR | website</title>
+</head>
+<body> 
+    <style>
+        .list > li > .cate_active::before{
+    
+    background:var(--color-text);
+    content: "";
+    width: 100%;
+    height: 0.187rem;
+    border-radius: 2rem;
+    bottom: 0;
+    position: absolute;
+    transition: all .2s ease-in;
+   
+ }
+
+    </style>
+    <header class="container">
+        <div class="container_hero">
+            <div class="title">kodiar</div>
+        <div class="navegate">
+            <nav class="nav_link">
+                <ul class="list">
+                    <div class="notificacion">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <li ><a class="iventario cate_active" href="index.html" >Inicio</a></li>
+                    <li ><a class="iventario" href="">Inventario</a></li>
+                    <li><a href="categorias/categorias.html">Categorias</a></li>
+                    <li><a href="agregarProducts/productos.html" >Agregar</a></li>
+                    <li><a href="./usuario/usuario.html">Cuenta de Usuario</a></li>
+                    <li><a href="">Ajustes</a></li>
+                </ul>
+            </nav>
+
+        </div>
+        </div>
+
+    </header>
+
+    <main class="main_container">
+        <div class="contendedor_salida">
+            <form action="">
+                <div class="porduct_salida">
+                   <div class="first_ca">
+                    <div class="label_ca">
+                        <label for="search_ca" class="control-label">Codigo del producto</label>
+                    </div>
+                    <div class="input-type_ca">
+                        <div class="input_icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <div class="input_salida">
+                            <input type="search" name="search_ca " id="search_ca" autocomplete="off" class="jxrg"
+                            placeholder="Codigo producto..." >
+                        </div>
+                    </div>
+                   </div>
+                   <div class="secon-ca">
+                   
+                        <div class="inputs_first">
+                            <div class="input-typea_ca">
+                                <div class="label_ca">
+                                    <label for="search"
+                                    class="control-label">Nombre del producto</label>
+                                </div>
+                               <div class="input-type_ca">
+                                <div class="input_icon">
+                                    <i class="fa-solid fa-magnifying-glass"></i></div>
+                                <div class="input_salida">
+                                    <input type="search" name="search" id="search" autocomplete="off" 
+                                    class="jxrg" placeholder="Nombre del producto..."/>
+                                </div>
+                               </div>
+                            </div>
+                            <div class="input-type">
+                                <div class="cantidad">
+                                    <label for="cantidad"
+                                    class="control-label">Unidades</label>
+                                </div>
+                                <div class="input_salida">
+                                    <input type="text" name="cantidad" id="cantidad" autocomplete="off" placeholder="Ingrese una cantidad" 
+                                    class="xtline">
+                                </div>
+                            </div>
+                        </div>
+                
+                   </div>
+                   <div class="peoduc_list_ca">
+                       <ul class="menu_slist">
+                           <li>Codigo P.</li>
+                           <li>Nombre P.</li>
+                           <li>Descripcion P.</li>
+                           <li>Cantidad</li>
+                           <li>Valor unitario</li>
+                           <li>Total</li>
+                           <li> 
+                            <div id="cancel_product" class="cancel_u" ><i class="fa-solid fa-x"></i> Cancelar</div>
+                           </li>
+                           <hr>
+                           
+                       </ul>
+                 
+                 
+
+                   </div>
+      
+                <div class="complete_info">
+                    <div class="pagos_list_ca">
+                        <div class="total_pago">
+                            <label for="id_pagoT"
+                            class="control-label">Total a pagar</label>
+                            <input type="text" name="t_pago" id="id_pagoT" class="input_pagoT xtline">
+                        </div>
+                    </div>
+                    
+                    <div class="pagos_list_ca">
+                        <div class="pago">
+                            <label for="pago"
+                            class="control-label">Pagó</label>
+                            <input type="text" name="pago" id="pago" class="input_pagoT xtline" >
+                        </div>
+                    </div>
+                    <div class="pagos_list_ca">
+                        <div class="pago_cambio">
+                            <label for="pago"
+                            class="control-label">Cambio</label>
+                            <input type="text" name="pago" id="pago_cambio" class="input_pagoT xtline" >
+                        </div>
+                    </div>
+                
+               </div>
+                  <div class="cancel_pagos_exit">
+                      <div class="cancelar_pago">
+                          <div class="cancel_u">
+                            <i class="fa-solid fa-x"></i> Cancelar
+                          </div>
+                      </div>
+                      <div class="pago_exit">
+                        <button class="save">
+                            <i class="fa-solid fa-check"></i> Guardar
+                          </button>
+                      </div>
+                  </div>
+                    
+                </div>
+            </form>
+
+        </div>
+        <div class="factura">
+            Factura pendiente
+        </div>
+        
+    </main>
+
+</body>
+</html>

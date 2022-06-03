@@ -1,19 +1,20 @@
 const express = require("express");
+const bodyParser = require('body-parser')
+const sqlite3 = require("sqlite3")
+const path = require("path")
 const app = express()
 const port = 3000;
-const sqlite3 = require("sqlite3")
-const bodyParser = require('body-parser')
-const db = new sqlite3.Database("./db/users.db")
+const db = new sqlite3.Database("./db/kodiar.db")
 
 
 // ? Settigs
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-app.set("view engine","pug")
-
+app.set("view engine","ejs")
+app.use(express.static(path.join(__dirname, "/public")))
 app.get("/",(req,res)=>{
-     db.all("SELECT * FROM usuarios", (error, rows) => {
+     db.all("SELECT * FROM usuario", (error, rows) => {
           rows.forEach((row) => {
             console.log(row.name);
             console.log(row.correo);
@@ -35,7 +36,7 @@ app.post("/register",(req,res)=>{
      let telefono = req.body.telefono
      let descripcion = req.body.descripcion
      let avatar = req.body.avatar
-     db.run(`INSERT INTO usuarios(documento,name,correo,password,telefono,descripcion,avatar) VALUES(?, ?, ?, ?, ?, ?, ?)`, 
+     db.run(`INSERT INTO usuario(documento,name,correo,password,telefono,descripcion,avatar) VALUES(?, ?, ?, ?, ?, ?, ?)`, 
      [documento,name,correo,password,telefono,descripcion,avatar],
      (error,row)=>{
        if (!error){
@@ -50,7 +51,7 @@ app.post("/register",(req,res)=>{
 
 })
 console.log(db)
-// ? Listening Server3
+
 app.listen(port, (req,res) => {
      console.log("Listening on port",port)
 })
