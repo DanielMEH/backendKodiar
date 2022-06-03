@@ -22,7 +22,7 @@ app.get("/",(req,res)=>{
           })
      
       })
-      res.render("register")
+      res.render("login")
 
      
 
@@ -55,6 +55,7 @@ console.log(db)
 app.get('/inventario', (req, res) => {
   res.render('inventario');
 })
+
 
 app.listen(port, (req,res) => {
      console.log("Listening on port",port)
