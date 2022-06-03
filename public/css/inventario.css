@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+
+    --color-text:#1aa7f8;
+}
+body{
+    background: #f0f2f5;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+
+.container{
+    position: relative;
+    background-color:rgba(255, 255, 255, 0.457);
+    backdrop-filter: blur(2px);
+    z-index: 200;
+}
+
+.container_hero{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.67rem;
+}
+.nav_link{
+    display: flex;
+    align-items: center;
+
+}
+.list{
+    display:flex;
+    align-items: center;
+
+}
+.list >li {
+    list-style: none;
+    margin-right: 1rem;
+}
+.list > li > a{
+    text-decoration: none;
+    position: relative;
+    margin: 0.40rem 0.50em;
+    padding: 0.50rem 0.70rem;
+    color: var(--color-text);
+}
+.list > li > a.active{
+    width: 100%;
+    color: var(--color-text);
+}
+.list > li > a::before{
+    
+   background:var(--color-text);
+   content: "";
+   width: 0%;
+   height: 0.187rem;
+   border-radius: 2rem;
+   bottom: 0;
+   position: absolute;
+   transition: all .2s ease-in;
+  
+}
+.list > li > .agre_active::before{
+    
+    background:var(--color-text);
+    content: "";
+    width: 100%;
+    height: 0.187rem;
+    border-radius: 2rem;
+    bottom: 0;
+    position: absolute;
+    transition: all .2s ease-in;
+   
+ }
+.list > li > a:hover::before{
+    width: 100%;
+}
+.container .title{
+    font-size: 2rem;
+    margin: 0 2rem;
+    font-weight: bold;
+}
+.notificacion{
+  
+    padding:2px;
+    padding: 0.004;
+    border-radius: 4rem;
+    cursor: pointer;
+    position: relative;
+}
+.notificacion::before{
+    content:"3";
+    background:red;
+    padding: 1px 00.3rem;
+    border-radius: 3rem;
+    position: absolute;
+    left: 1rem;
+    top: -0.09rem;
+    color: #fff;
+    font-size: 13px;
+    border: 1px solid #fff;
+}
+.notificacion i{
+
+    color: #434444;
+    font-size: 1.3rem;
+    display: block;
+    margin: 2px;
+   
+}
+td{
+    width: 300px;
+    height: 30px;
+    box-shadow: 5px #1aa7f8;
+}
+th{
+    height: 50px; 
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    margin: 20px;
+    background-color: #1aa7f8;
+}
+
+.tr{
+    display: inline-flex;
+}
+.caja-mayor{
+    margin: 50px;
+}
+table{
+    border-radius: 5px;
+    border-color: #1aa7f8;
+}
+select{
+    background-color: #1aa7f8;
+    border-color: #1aa7f8;
+}
+option{
+    background: #fff;
+}

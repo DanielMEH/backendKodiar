@@ -52,6 +52,10 @@ app.post("/register",(req,res)=>{
 })
 console.log(db)
 
+app.get('/inventario', (req, res) => {
+  res.render('inventario');
+})
+
 app.listen(port, (req,res) => {
      console.log("Listening on port",port)
 })
