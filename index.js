@@ -52,6 +52,11 @@ app.post("/register",(req,res)=>{
 })
 console.log(db)
 
+app.get("/dasboard",(req,res)=>{
+
+  res.render("dasboard")
+
+})
 app.get('/inventario', (req, res) => {
   res.render('inventario');
 })
