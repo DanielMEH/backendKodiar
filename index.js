@@ -28,28 +28,34 @@ app.get("/",(req,res)=>{
 
 })
 
-app.post("/register",(req,res)=>{
+app.get('/login', (req, res) => {
+  res.render('login');
+})
+
+
+app.post("/register", (req,res)=>{
      let documento = req.body.documento
-     let name= req.body.name
+     let nombre= req.body.nombre
      let correo = req.body.correo
      let password = req.body.password
      let telefono = req.body.telefono
      let descripcion = req.body.descripcion
      let avatar = req.body.avatar
-     db.run(`INSERT INTO usuario(documento,name,correo,password,telefono,descripcion,avatar) VALUES(?, ?, ?, ?, ?, ?, ?)`, 
-     [documento,name,correo,password,telefono,descripcion,avatar],
-     (error,row)=>{
-       if (!error){
- 
-           console.log("Los datos se registraron con exito",row);
-           res.send(row)
-      
-         }else{
-           console.log("Los datos no se guardaron",error);
-         }
-     })
+    console.log(documento,nombre,correo,password)
 
+      db.run(`INSERT INTO usuario(documento,nombre,correo,password) VALUES(?, ?, ?, ?)`,
+      [documento,nombre,correo,password], (error, rows)=>{
+        if(error){
+          console.log("No se guardaron los datos",error)
+          
+        }
+  
+       res.redirect("/login")
+          console.log("Se guardaron los datos")
+
+        })
 })
+
 console.log(db)
 
 app.get("/dasboard",(req,res)=>{
@@ -59,6 +65,9 @@ app.get("/dasboard",(req,res)=>{
 })
 app.get('/inventario', (req, res) => {
   res.render('inventario');
+})
+app.get('/registro', (req, res) => {
+  res.render('registro');
 })
 
 
