@@ -28,6 +28,12 @@ app.get("/",(req,res)=>{
 
 })
 
+app.get("/product"(req,res)=>{
+  db.all()
+})
+
+
+
 app.post("/register",(req,res)=>{
      let documento = req.body.documento
      let name= req.body.name

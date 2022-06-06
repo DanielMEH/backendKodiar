@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="https://kit.fontawesome.com/fa98a09714.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <title>KODIAR</title>
+</head>
+<body> 
+    <header class="container">
+        <div class="container_hero">
+            <div class="title">kodiar</div>
+        <div class="navegate">
+            <nav class="nav_link">
+                <ul class="list">
+                    <div class="notificacion">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <li ><a class="iventario" href="../index.html">Inicio</a></li>
+                    <li ><a class="iventario" href="">Inventario</a></li>
+                    <li><a href="../categorias/categorias.html" class="cate_active">Categorias</a></li>
+                    <li><a href="../agregarProducts/productos.html" class="agre_active">Agregar</a></li>
+                    <li><a href="">Cuenta de Usuario</a></li>
+                    <li><a href="">Ajustes</a></li>
+                </ul>
+            </nav>
+
+        </div>
+        </div>
+
+    </header>
+    <main class="container_main">
+        <div class="registro_product todora">
+            <h2>Registro de Productos | Minimercados</h2>
+
+            <div class="formularios">
+                <form action="">
+                    <div class="boxs">
+                        <div class="one_box">
+                            <label for="cod_product" class="label-select">Codigo Producto:</label>
+                            <input type="text" id="cod_product"
+                            placeholder="Codigo Producto" class="input_code" name="codeProduct" />
+                        </div>  
+                       
+                        <div class="three_box">
+                            <label for="categoria" class="label-select">Categoria Producto:</label>
+                            <select name="" id="" class="select ">
+                            <option value="1"class="label-select">Categoria A </option>
+                            <option value="2">Categoria B </option>
+                            <option value="3">Categoria C </option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="registro">
+                        <h3 class="title_product">Registro de   Productos</h3>
+                        <div class="form_productos">
+                            <div class="name">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" id="nombre"  placeholder="name"
+                                class="input_co input_code"  name=""/>
+                            </div>
+                            <div class="infoprodct">
+                                <div class="infoone">
+                                    <div class="infotwo">
+                                        <label for="unidades"class="label-select">Unidades</label>
+                                        <input  type="number" id="unidades"  placeholder="Unidades" class="tato input_code" name="unidades"/>
+                                    </div>
+                                    <div class="infotwo">
+                                
+                                            <label for="pcompra"class="label-select">Precio Compra</label>
+                                            <input type="number" id="pcompra"  placeholder="Precio" class="tato input_code" name="precioCompra"/>
+                            
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="infoone">
+                                    <div class="infotwo">
+                                        <label for="pventa"class="label-select">Precio Venta</label>
+                                        <input type="number" id="pventa"  placeholder="Precio Venta"class="tato input_code" name="precioVenta"/>
+                                    </div>
+                                    <div class="infotwo">
+                                        
+                                            <label for="fvencimiento"class="label-select">Fecha Vencimiento</label>
+                                            <input type="date" id="fvencimiento" placeholder="Fecha Vencimiento" class="tato input_code" name="fechaVencimiento"/>
+                                        
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="descripcion">
+                        <label for="detalle" class="label-select">Detalle del Producto
+                            
+                        </label >
+                        <textarea class="input_code label-select" name="mensaje" id="mensaje" cols="30" rows="5" placeholder="Escribe la descripción del producto..."></textarea>
+                        </div>
+                        
+                    </div>
+
+                    <div class="register_date">
+                        <div class="add_product">
+                            <button class="green_botton">
+                                <i class="fa-solid fa-check"></i> Agregar
+                            </button>
+                        </div>
+                        <div class="canceld">
+                            <button class="red_botton">
+                                <i class="fa-solid fa-x"></i> Cancelar
+                            </button>
+                        </div>
+                    </div>
+
+                    
+                </form>
+            </div>
+        </div>
+        <!-- <div class="crud_product todora">
+            <h2></h2>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit eligendi, quibusdam quos distinctio praesentium totam sit asperiores nemo vel modi libero exercitationem dolorem similique repellat reiciendis nostrum eum reprehenderit sint?
+        </div> -->
+    </main>
+</body>
+</html>
