@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\kodiar"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "kodiar"
+	}
+}

@@ -8,7 +8,6 @@ const db = new sqlite3.Database("./db/kodiar.db")
 
 
 // ? Settigs
-
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.set("view engine","ejs")
@@ -28,10 +27,33 @@ app.get("/",(req,res)=>{
 
 })
 
-app.get("/product"(req,res)=>{
-  db.all()
+app.get("/product",(req,res)=>{
+  db.get("SELECT * FROM producto" ,(error, rows)=>{
+    rows.forEach((row)=> {
+      console.log(row.id_producto);
+      console.log(row.nombre_producto);
+      console.log(row.unidades_producto);
+      console.log(row.precio_compra);
+      console.log(row.precio_venta);
+      console.log(row.fecha_vencimiento);
+      console.log(row.descripcion_producto);
+      console.log(row.id_categoria);
+    })
+  })
+  res.render("product")
 })
 
+app.post("/product",(req,res)=>{
+  
+  const {id_producto,nombre_producto,unidades_producto,
+    precio_compra,precio_venta,fecha_vencimiento,descripcion_producto,id_categoria
+  } = req.body
+
+  db.run(`INSERT INTO producto(id_producto,nombre_producto,unidades_producto,
+    precio_compra,precio_venta,fecha_vencimiento,descripcion_producto,id_categoria) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,[
+
+    ] )
+})
 
 
 app.post("/register",(req,res)=>{
