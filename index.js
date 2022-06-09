@@ -55,9 +55,16 @@ app.post("/product",(req,res)=>{
     precio_compra,precio_venta,fecha_vencimiento,descripcion_producto,id_categoria) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,[
       
     id_producto,nombre_producto,unidades_producto,
-    precio_compra,precio_venta,fecha_vencimiento,descripcion_producto,id_categoria
-
-    ])
+    precio_compra,precio_venta,fecha_vencimiento,
+    descripcion_producto,id_categoria],(error,rows)=>{
+      if (error) {
+        console.log("Se produjo un error",error);
+        res.json({messaje:"error al guardar los datos"})
+        
+      }
+      res.redirect("/product")
+      
+    })
 })
 
 
@@ -74,7 +81,7 @@ app.post("/register",(req,res)=>{
       db.run(`INSERT INTO usuario(documento,nombre,correo,password) VALUES(?, ?, ?, ?)`,
       [documento,nombre,correo,password], async(error, rows)=>{
         if(error){
-          console.log("data save",error)
+          console.log("se produjo un error al guardar sus datos",error)
           
         }
         const transporter = nodemailer.createTransport({
