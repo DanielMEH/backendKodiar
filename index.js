@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require('body-parser')
 const sqlite3 = require("sqlite3")
 const path = require("path")
+const nodemailer = require("nodemailer")
 const app = express()
 const port = 3000;
 const db = new sqlite3.Database("./db/kodiar.db")
@@ -62,26 +63,46 @@ app.post("/product",(req,res)=>{
 
 app.post("/register",(req,res)=>{
      let documento = req.body.documento
-     let name= req.body.name
+     let nombre= req.body.nombre
      let correo = req.body.correo
      let password = req.body.password
      let telefono = req.body.telefono
      let descripcion = req.body.descripcion
      let avatar = req.body.avatar
-     db.run(`INSERT INTO usuario(documento,name,correo,password,telefono,descripcion,avatar) VALUES(?, ?, ?, ?, ?, ?, ?)`, 
-     [documento,name,correo,password,telefono,descripcion,avatar],
-     (error,row)=>{
-       if (!error){
- 
-           console.log("Los datos se registraron con exito",row);
-           res.send(row)
-      
-         }else{
-           console.log("Los datos no se guardaron",error);
-         }
-     })
+    console.log(documento,nombre,correo,password)
 
+      db.run(`INSERT INTO usuario(documento,nombre,correo,password) VALUES(?, ?, ?, ?)`,
+      [documento,nombre,correo,password], async(error, rows)=>{
+        if(error){
+          console.log("data save",error)
+          
+        }
+        const transporter = nodemailer.createTransport({
+          host: 'smtp.gmail.com',
+          port: 587,
+          auth: {
+              user: 'kodiarEnterpres@gmail.com',
+              pass: 'nqcmsukadpvctxhs'
+          }
+        });
+        
+        // send email
+        await  transporter.sendMail({
+          from: 'kodiarEnterpres@gmail.com',
+          to: 'angaritagerman@hotmail.com',
+          subject: 'Test Email Subject',
+          html: '<h1 style="color: red;">hola profe SOY KODIAR</h1> <img src="https://3con14.biz/js">'
+        }).then((res) =>{
+          console.log(res)
+        }).catch((err) =>{console.log(err)});
+    
+  
+       res.redirect("/login")
+          
+
+        })
 })
+
 console.log(db)
 
 app.get("/dasboard",(req,res)=>{
@@ -91,6 +112,9 @@ app.get("/dasboard",(req,res)=>{
 })
 app.get('/inventario', (req, res) => {
   res.render('inventario');
+})
+app.get('/registro', (req, res) => {
+  res.render('registro');
 })
 
 
