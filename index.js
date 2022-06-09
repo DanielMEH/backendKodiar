@@ -27,6 +27,7 @@ app.get("/",(req,res)=>{
 
 })
 
+// RUTAS PRODUCTO
 app.get("/product",(req,res)=>{
   db.get("SELECT * FROM producto" ,(error, rows)=>{
     rows.forEach((row)=> {
@@ -51,8 +52,11 @@ app.post("/product",(req,res)=>{
 
   db.run(`INSERT INTO producto(id_producto,nombre_producto,unidades_producto,
     precio_compra,precio_venta,fecha_vencimiento,descripcion_producto,id_categoria) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,[
+      
+    id_producto,nombre_producto,unidades_producto,
+    precio_compra,precio_venta,fecha_vencimiento,descripcion_producto,id_categoria
 
-    ] )
+    ])
 })
 
 
