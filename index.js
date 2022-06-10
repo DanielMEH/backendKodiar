@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const sqlite3 = require("sqlite3")
 const path = require("path")
 const nodemailer = require("nodemailer")
+const bcrypt = require("bcrypt")
 const app = express()
 const port = 3000;
 const db = new sqlite3.Database("./db/kodiar.db")
@@ -13,20 +14,22 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.set("view engine","ejs")
 app.use(express.static(path.join(__dirname, "/public")))
-app.get("/",(req,res)=>{
-     db.all("SELECT * FROM usuario", (error, rows) => {
-          rows.forEach((row) => {
-            console.log(row.name);
-            console.log(row.correo);
-            console.log(row.password);
-          })
-     
-      })
-      res.render("login")
 
-     
+app.get("/dasboard",(req,res)=>{
+
+  res.render("dasboard")
 
 })
+app.get('/inventario', (req, res) => {
+  res.render('inventario');
+})
+app.get('/registro', (req, res) => {
+  res.render('registro');
+})
+app.get('/login', (req, res) => {
+  res.render('login');
+})
+
 
 // RUTAS PRODUCTO
 app.get("/product",(req,res)=>{
@@ -76,14 +79,17 @@ app.post("/register",(req,res)=>{
      let telefono = req.body.telefono
      let descripcion = req.body.descripcion
      let avatar = req.body.avatar
-    console.log(documento,nombre,correo,password)
+     const saltRounds = 10;
+     const encriptar =  bcrypt.genSaltSync(saltRounds);
+     const hash = bcrypt.hashSync(password, encriptar);
+     console.log("encriptado",hash)
 
       db.run(`INSERT INTO usuario(documento,nombre,correo,password) VALUES(?, ?, ?, ?)`,
-      [documento,nombre,correo,password], async(error, rows)=>{
+      [documento,nombre,correo,hash], async(error, rows)=>{
         if(error){
           console.log("se produjo un error al guardar sus datos",error)
-          
         }
+         console.log("data save",rows)
         const transporter = nodemailer.createTransport({
           host: 'smtp.gmail.com',
           port: 587,
@@ -111,18 +117,40 @@ app.post("/register",(req,res)=>{
 })
 
 console.log(db)
+app.post('/login',(req,res) =>{
 
-app.get("/dasboard",(req,res)=>{
+  const{ correo, password} =req.body;
+  console.log(correo,password)
+  
+  db.get("SELECT password FROM usuario WHERE correo=$correo",{
+    $correo:correo  
+  },(error, rows)=>{
 
-  res.render("dasboard")
+    if(error){
+      
+      return res.send("error",rows.correo)
+      
+    }
+    if (rows) {
+      const passDB = rows.password
+      if (bcrypt.compareSync(password, passDB)){
+       
+        res.redirect("/dasboard")
+  
+      }
+        return res.send("los datos no se guardaron")
+  
+      
+    }
+    return res.send("los datos no se guardaron")
+  
+  
+    
+
+  })
 
 })
-app.get('/inventario', (req, res) => {
-  res.render('inventario');
-})
-app.get('/registro', (req, res) => {
-  res.render('registro');
-})
+
 
 
 app.listen(port, (req,res) => {
