@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/fa98a09714.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link rel="stylesheet" href="/css/categoria.css">
+    <title>categorias | kodiar </title>
+</head>
+<body>
+    <header class="container">
+        <div class="container_hero">
+            <div class="title">kodiar</div>
+        <div class="navegate">
+            <nav class="nav_link">
+                <ul class="list">
+                    <div class="notificacion">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <li>
+                        <a href="/dasboard">Inicio</a></li>
+                            <li><a href="/inventario">Inventario</a></li>
+                            <li><a class="iventario cate_active" href="/categoria">Categorias</a></li>
+                            <li><a href="/producto">productos</a></li>
+                            <li><a href="/cuenta">Cuenta</a></li>
+                            <li><a href="/ajustes">Ajustes</a></li>
+                </ul>
+            </nav>
+
+        </div>
+        </div>
+
+    </header>
+
+
+    <div class="for-categoria">
+      <form action="/categoria"  method="post" >
+
+        <div class="categoria-input">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre"
+            placeholder="Nombre categoria">
+        </div>
+
+        <div class="categoria-input">
+            <label for="imagen">Imagen:</label>
+            <input type="file" id="imagen" name="imagen">
+        </div>
+
+        <div class="button">
+            <button>Crear categoria</button>
+
+        </div>
+        
+      </form>
+    </div>
+
+    <main  class="container_categoria">
+        <div class="title_main">Categorias</div>
+<div class="contaner_min">
+
+    <% if(data) {  %>
+
+        <% for(let i = 0; i < data.length; i++){ %>
+
+            <h1><%=  data[i].nombre %></h1>
+            
+          
+            <% } %>
+
+        <% } %>
+    
+
+    <section class="menu_categoria bebes">
+        <div class="categoria">
+        <h2>Bebés</h2>
+        </div>
+        <div class="link_product">
+            <a href="">Ver producto <i class="fa-solid fa-angle-right"></i></a>
+        </div>
+    </section>
+
+    
+
+
+</div>  
+    
+    </main>
+
+    <div class="plus"><i class="fa-solid fa-plus"></i></div>
+    
+</body>
+</html>

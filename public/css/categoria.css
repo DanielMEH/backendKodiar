@@ -50,31 +50,31 @@
 }
 
 .bebes{
-    background-image: linear-gradient(90deg,#74747463,#75757565),url("../categorias/image/2112.q712.005.F.m009.c5.toy\ store\ composition\ set\ flat.jpg");
+    background-image: linear-gradient(90deg,#74747463,#75757565),url("/image/2112.q712.005.F.m009.c5.toy\ store\ composition\ set\ flat.jpg");
     background-size: cover;
     background-position: center center;
 
 }
 .mascotas{
-    background-image: linear-gradient(90deg,#74747463,#75757565),url("../categorias/image/mascotas.jpg");
+    background-image: linear-gradient(90deg,#74747463,#75757565),url("/image/mascotas.jpg");
     background-size: cover;
     background-position: center center;
 }
 
 .bebidas{
-    background-image: linear-gradient(90deg,#74747463,#75757565),url("../categorias/image/bebivas.jpg");
+    background-image: linear-gradient(90deg,#74747463,#75757565),url("/image/bebivas.jpg");
     background-size: cover;
     background-position: center center;
 }
 
 .cuidado_personal{
-background-image: linear-gradient(90deg,#74747463,#75757565),url("../categorias/image/cuidadopersonal.jpg");
+background-image: linear-gradient(90deg,#74747463,#75757565),url("/image/cuidadopersonal.jpg");
 background-size: cover;
 background-position: center center;
 }
 
 .limpieza{
-    background-image: linear-gradient(90deg,#74747463,#75757565),url("../categorias/image/limpieza.jpg");
+    background-image: linear-gradient(90deg,#74747463,#75757565),url("/image/limpieza.jpg");
 background-size: cover;
 background-position: center center;
 }
@@ -138,5 +138,49 @@ background-position: center center;
     right: 1rem;
     margin: 1rem;
     cursor: pointer;
+
+}
+
+.for-categoria{
+    width: 500px;
+    box-shadow: 0px 0px 10px .7px rgb(192, 192, 192);
+    margin: 3rem auto;
+    border-radius: 14px;
+    padding: 15px;
+
+}
+
+.for-categoria form{
+    display: flex;
+    flex-direction: column;
+}
+
+.categoria-input{
+    display: flex;
+    flex-direction: column;
+}
+
+.categoria-input input{
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid rgb(219, 217, 217);
+    outline: #1aa7f8;
+
+
+}
+
+.categoria-input label{
+    margin: 3px 4px;
+}
+
+.button button{
+    margin: 10px 12px;
+    background: #1aa7f8;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    color: white;
+    padding: 8px;
+    cursor: pointer;
+    
 
 }

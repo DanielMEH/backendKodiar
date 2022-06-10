@@ -3,7 +3,9 @@ const bodyParser = require('body-parser')
 const sqlite3 = require("sqlite3")
 const path = require("path")
 const nodemailer = require("nodemailer")
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+const { render } = require("ejs");
+const { error } = require("console");
 const app = express()
 const port = 3000;
 const db = new sqlite3.Database("./db/kodiar.db")
@@ -13,6 +15,7 @@ const db = new sqlite3.Database("./db/kodiar.db")
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.set("view engine","ejs")
+app.set('views',path.join(__dirname,'views'))
 app.use(express.static(path.join(__dirname, "/public")))
 
 app.get("/dasboard",(req,res)=>{
@@ -26,8 +29,26 @@ app.get('/inventario', (req, res) => {
 app.get('/registro', (req, res) => {
   res.render('registro');
 })
-app.get('/login', (req, res) => {
+app.get('/', (req, res) => {
   res.render('login');
+})
+app.get("/producto",(req,res)=>{
+  res.render("product")
+
+})
+app.get("/categoria",(req,res)=>{
+
+  db.all("SELECT * FROM categoria",(error, rows)=>{
+    
+    res.render("categorias",{data:rows})
+    
+  })
+
+})
+
+app.get("/cuenta",(req,res)=>{
+
+  res.render("cuenta")
 })
 
 
@@ -117,19 +138,15 @@ app.post("/register",(req,res)=>{
 })
 
 console.log(db)
-app.post('/login',(req,res) =>{
+app.post('/login', async(req,res) =>{
 
   const{ correo, password} =req.body;
-  console.log(correo,password)
-  
   db.get("SELECT password FROM usuario WHERE correo=$correo",{
-    $correo:correo  
-  },(error, rows)=>{
+   $correo:correo  
+  }, (error, rows)=>{
 
     if(error){
-      
       return res.send("error",rows.correo)
-      
     }
     if (rows) {
       const passDB = rows.password
@@ -151,6 +168,24 @@ app.post('/login',(req,res) =>{
 
 })
 
+app.post("/categoria", (req,res) =>{
+  const {nombre, imagen} = req.body;
+  console.log(nombre, imagen)
+  
+  db.run(`INSERT INTO categoria(nombre,imagen) VALUES (?, ?)`,
+  [nombre, imagen],(error,rows)=>{
+    if (error) {
+       res.send("error")
+      console.log("error",error)  
+    }else{
+      console.log("save data")
+      res.redirect("/categoria")
+    }
+
+  })
+  
+
+})
 
 
 app.listen(port, (req,res) => {
