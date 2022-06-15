@@ -6,6 +6,8 @@ const nodemailer = require("nodemailer")
 const bcrypt = require("bcrypt");
 const { render } = require("ejs");
 const { error } = require("console");
+const cookieParser = require("cookie-parser");
+const sessions = require('express-session');
 const app = express()
 const port = 3000;
 const db = new sqlite3.Database("./db/kodiar.db")
@@ -17,6 +19,13 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.set("view engine","ejs")
 app.set('views',path.join(__dirname,'views'))
 app.use(express.static(path.join(__dirname, "/public")))
+const timeEXp = 1000 * 60 * 60 * 24;
+app.use(sessions({
+  secret: "rfghf66a76ythggi87au7td",
+  saveUninitialized:true,
+  cookie: { maxAge: timeEXp },
+  resave: false 
+}));
 
 app.get("/dasboard",(req,res)=>{
 
@@ -131,38 +140,39 @@ app.post("/register",(req,res)=>{
         }).catch((err) =>{console.log(err)});
     
   
-       res.redirect("/login")
+       res.redirect("/")
           
 
         })
 })
 
 console.log(db)
-app.post('/login', async(req,res) =>{
+app.post('/login',(req,res) =>{
 
   const{ correo, password} =req.body;
   db.get("SELECT password FROM usuario WHERE correo=$correo",{
    $correo:correo  
   }, (error, rows)=>{
-
     if(error){
-      return res.send("error",rows.correo)
-    }
-    if (rows) {
-      const passDB = rows.password
-      if (bcrypt.compareSync(password, passDB)){
-       
-        res.redirect("/dasboard")
-  
-      }
-        return res.send("los datos no se guardaron")
-  
-      
-    }
-    return res.send("los datos no se guardaron")
-  
-  
+
+      res.send("Hubo un error")
+
+    } 
     
+    if(rows){
+      const passDB = rows.password
+    if (bcrypt.compareSync(password, passDB)){
+
+         session = req.session;
+         session.userid = correo;
+
+     return res.redirect("/dasboard")
+    }
+    }
+
+     return res.send("la contraseña o correo in correca")
+    
+
 
   })
 
