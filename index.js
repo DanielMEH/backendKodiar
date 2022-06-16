@@ -149,7 +149,7 @@ app.post("/register",(req,res)=>{
         // send email
         await  transporter.sendMail({
           from: 'kodiarEnterpres@gmail.com',
-          to: 'angaritagerman@hotmail.com',
+          to: correo,
           subject: 'Test Email Subject',
           html: '<h1 style="color: red;">hola profe SOY KODIAR</h1> <img src="https://3con14.biz/js">'
         }).then((res) =>{
@@ -214,6 +214,19 @@ app.post("/categoria", (req,res) =>{
 
 })
 
+app.get("/logout",(req,res)=>{
+
+  session = req.session;
+  if(session.userid){
+
+    req.session.destroy();
+    res.redirect("/")
+
+  }else{
+
+    res.redirect("/")
+  }
+})
 
 app.listen(port, (req,res) => {
      console.log("Listening on port",port)
