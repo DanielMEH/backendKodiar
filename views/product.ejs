@@ -11,6 +11,11 @@
     <title>KODIAR</title>
 </head>
 <body> 
+
+    <style>
+       
+    </style>
+   
     <header class="container">
         <div class="container_hero">
             <div class="title">kodiar</div>
@@ -40,7 +45,7 @@
             <h2>Registro de Productos | Minimercados</h2>
 
             <div class="formularios">
-                <form action="">
+                <form action="/producto" method="post">
                     <div class="boxs">
                         <div class="one_box">
                             <label for="cod_product" class="label-select">Codigo Producto:</label>
@@ -49,11 +54,22 @@
                         </div>  
                        
                         <div class="three_box">
+                           
                             <label for="categoria" class="label-select">Categoria Producto:</label>
-                            <select name="" id="" class="select ">
-                            <option value="1"class="label-select">Categoria A </option>
-                            <option value="2">Categoria B </option>
-                            <option value="3">Categoria C </option>
+                            <select name="categoria" id="" class="select">
+
+                            <% if(data.length){ %>
+
+                                <% for (let i = 0; i < data.length; i++) { %>
+                              
+                                    <option value="<%= data[i].id_categoria %>" name="<%= data[i].id_categoria %>"><%= data[i].nombre %></option>
+                                    
+                               <% } %> 
+
+                            <% }else{ %>
+                                <option value="">Categoria no disponible</option>
+
+                            <%}  %>
                             </select>
                         </div>
 
@@ -64,7 +80,7 @@
                             <div class="name">
                                 <label for="nombre">Nombre</label>
                                 <input type="text" id="nombre"  placeholder="name"
-                                class="input_co input_code"  name=""/>
+                                class="input_co input_code"  name="name"/>
                             </div>
                             <div class="infoprodct">
                                 <div class="infoone">
@@ -123,10 +139,49 @@
                 </form>
             </div>
         </div>
-        <!-- <div class="crud_product todora">
-            <h2></h2>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit eligendi, quibusdam quos distinctio praesentium totam sit asperiores nemo vel modi libero exercitationem dolorem similique repellat reiciendis nostrum eum reprehenderit sint?
-        </div> -->
+        <div class="limiter">
+            <div class="container-table100">
+            <div class="wrap-table100">
+            <div class="table100">
+            <table>
+            <thead>
+            <tr class="table100-head">
+            <th class="column1">Codigo</th>
+            <th class="column3">Nombre</th>
+            <th class="column2">Categoria</th>
+            <th class="column4">Unidades</th>
+            <th class="column5">Precio Compra</th>
+            <th class="column6">Precio Venta</th>
+            <th class="column7">Fecha Vencimiento</th>
+            <th class="column8">Descripción</th>
+            </tr>
+            </thead>
+            <tbody>
+                <% if (data.length) {%>
+                    <% for (let product = 0; product < data.length; product++) { %>
+                <tr>
+                <td class="column1"><%= data[product].id %>  </td>
+                <td class="column2"><%= data[product].namep %> </td>
+                <td class="column3"><%= data[product].nombre %></td>
+                <td class="column4"><%= data[product].unidades %></td>
+                <td class="column5"><%= data[product].precioc %></td>
+                <td class="column6"><%= data[product].preciov %></td>
+                <td class="column7"><%= data[product].fechaven %></td>
+                <td class="column8"><%= data[product].descripcion %></td>
+                
+            </tr>  
+              <% } %> 
+            
+           <% } else {  %> 
+            
+           <% } %> 
+            
+            </tbody>
+            </table>
+            </div>
+            </div>
+            </div>
+            </div>
     </main>
 </body>
 </html>

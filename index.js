@@ -65,14 +65,28 @@ app.get('/', (req, res) => {
 app.get("/producto",(req,res)=>{
 
   
-  
   session = req.session;
-
+  
   if (session.userid) {
-
-    res.render("product")
-   
-
+    db.all(`
+    SELECT
+      producto.id,
+      producto.namep,
+      producto.unidades,
+      producto.precioc,
+      producto.preciov,
+      producto.fechaven,
+      producto.descripcion,
+      categoria.nombre
+    FROM producto
+    INNER JOIN categoria ON producto.id_categoria = categoria.id_categoria;
+    
+    `,(error, rows)=>{
+      console.log(rows)
+      
+      res.render("product", {data:rows})
+    })
+    
   }else{
 
     
@@ -98,24 +112,22 @@ app.get("/cuenta",(req,res)=>{
 
 // RUTAS PRODUCTO
 
-app.post("/product",(req,res)=>{
+app.post("/producto",(req,res)=>{
   
-  const {id_producto,nombre_producto,unidades_producto,
-    precio_compra,precio_venta,fecha_vencimiento,descripcion_producto,id_categoria
+  const {codeProduct,categoria,name,unidades,
+    precioCompra,precioVenta,fechaVencimiento,mensaje
   } = req.body
 
-  db.run(`INSERT INTO producto(id_producto,nombre_producto,unidades_producto,
-    precio_compra,precio_venta,fecha_vencimiento,descripcion_producto,id_categoria) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,[
-      
-    id_producto,nombre_producto,unidades_producto,
-    precio_compra,precio_venta,fecha_vencimiento,
-    descripcion_producto,id_categoria],(error,rows)=>{
+  db.run(`INSERT INTO producto(id,namep,unidades,
+    precioc,preciov,fechaven,descripcion,id_categoria) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,[
+      codeProduct,name,unidades,
+      precioCompra,precioVenta,fechaVencimiento,mensaje,categoria],(error,rows)=>{
       if (error) {
         console.log("Se produjo un error",error);
         res.json({messaje:"error al guardar los datos"})
         
       }
-      res.redirect("/product")
+      res.redirect("/producto")
       
     })
 })
