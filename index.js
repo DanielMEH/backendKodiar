@@ -29,11 +29,32 @@ app.use(sessions({
 
 app.get("/dasboard",(req,res)=>{
 
-  res.render("dasboard")
+  session = req.session;
+
+  if (session.userid) {
+    res.render("dasboard")
+
+  }else{
+
+    
+    res.redirect("/")
+  }
+
 
 })
 app.get('/inventario', (req, res) => {
-  res.render('inventario');
+
+  session = req.session;
+
+  if (session.userid) {
+   
+    res.render('inventario');
+
+  }else{
+
+    
+    res.redirect("/")
+  }
 })
 app.get('/registro', (req, res) => {
   res.render('registro');
@@ -42,7 +63,21 @@ app.get('/', (req, res) => {
   res.render('login');
 })
 app.get("/producto",(req,res)=>{
-  res.render("product")
+
+  
+  
+  session = req.session;
+
+  if (session.userid) {
+
+    res.render("product")
+   
+
+  }else{
+
+    
+    res.redirect("/")
+  }
 
 })
 app.get("/categoria",(req,res)=>{
@@ -62,21 +97,6 @@ app.get("/cuenta",(req,res)=>{
 
 
 // RUTAS PRODUCTO
-app.get("/product",(req,res)=>{
-  db.get("SELECT * FROM producto" ,(error, rows)=>{
-    rows.forEach((row)=> {
-      console.log(row.id_producto);
-      console.log(row.nombre_producto);
-      console.log(row.unidades_producto);
-      console.log(row.precio_compra);
-      console.log(row.precio_venta);
-      console.log(row.fecha_vencimiento);
-      console.log(row.descripcion_producto);
-      console.log(row.id_categoria);
-    })
-  })
-  res.render("product")
-})
 
 app.post("/product",(req,res)=>{
   
@@ -106,9 +126,6 @@ app.post("/register",(req,res)=>{
      let nombre= req.body.nombre
      let correo = req.body.correo
      let password = req.body.password
-     let telefono = req.body.telefono
-     let descripcion = req.body.descripcion
-     let avatar = req.body.avatar
      const saltRounds = 10;
      const encriptar =  bcrypt.genSaltSync(saltRounds);
      const hash = bcrypt.hashSync(password, encriptar);
