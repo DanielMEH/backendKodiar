@@ -9,6 +9,10 @@
     <script src="https://kit.fontawesome.com/fa98a09714.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <title>KODIAR</title>
 </head>
 <body> 
@@ -42,7 +46,7 @@
 
     </header>
     <main class="container_main">
-        <div class="registro_product todora">
+        <div class="registro_product todora animate__animated  animate__zoomIn">
             <h2>Registro de Productos | Minimercados</h2>
 
             <div class="formularios">
@@ -57,13 +61,16 @@
                         <div class="three_box">
                            
                             <label for="categoria" class="label-select">Categoria Producto:</label>
-                            <select name="categoria" id="" class="select">
+                            <select name="id_categoria" id="" class="select">
+                               
 
-                            <% if(data.length){ %>
+                            <% if(data){ %>
+
+                                
 
                                 <% for (let i = 0; i < data.length; i++) { %>
                               
-                                    <option value="<%= data[i].id_categoria %>" name="<%= data[i].id_categoria %>"><%= data[i].nombre %></option>
+                                    <option value="<%= data[i].id_categoria %>" name="<%= data[i].id_categoria%>"><%= data[i].nombre %></option>
                                     
                                <% } %> 
 
@@ -140,7 +147,7 @@
                 </form>
             </div>
         </div>
-        <div class="datatable-container">
+        <div class="datatable-container animate__animated animate__zoomIn" >
             <div class="header-tools">
             
                 <div class="search">
@@ -200,6 +207,7 @@
               <% } %> 
             
            <% } else {  %> 
+            <td>No hay productos Registrados</td>
             
            <% } %> 
             
@@ -211,7 +219,7 @@
             <div class="footer-tools">
                 <div class="list-items">
                    <span  class="span_tittle">Mostrar </span>
-                    <select name="n-entries"id="n-enties"class="n-entries">
+                    <select name="n-entries"id="n-enties"class="n-entries" >
                         <option value="15">5</option>
                         <option value="10"selected>10</option>
                         <option value="15">15</option>

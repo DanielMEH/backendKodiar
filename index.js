@@ -5,7 +5,7 @@ const path = require("path")
 const nodemailer = require("nodemailer")
 const bcrypt = require("bcrypt");
 const { render } = require("ejs");
-const { error } = require("console");
+const { error, Console } = require("console");
 const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
 const app = express()
@@ -63,13 +63,13 @@ app.get('/', (req, res) => {
   res.render('login');
 })
 app.get("/producto",(req,res)=>{
-
   
   session = req.session;
   
   if (session.userid) {
     db.all(`
     SELECT
+    
       producto.id,
       producto.namep,
       producto.unidades,
@@ -77,14 +77,21 @@ app.get("/producto",(req,res)=>{
       producto.preciov,
       producto.fechaven,
       producto.descripcion,
-      categoria.nombre
+      categoria.nombre,
+      categoria.id_categoria
     FROM producto
-    INNER JOIN categoria ON producto.id_categoria = categoria.id_categoria;
+     JOIN categoria ON producto.id_categoria = categoria.id_categoria ORDER BY producto.id DESC
     
     `,(error, rows)=>{
+     
+      if(error){
+        console.log(error)
+        
+        return res.send("Hubo un error al cargar los datos",error)
+        
+      }
       console.log(rows)
-      
-      res.render("product", {data:rows})
+      return res.render("product", {data:rows})
     })
     
   }else{
@@ -113,15 +120,16 @@ app.get("/cuenta",(req,res)=>{
 // RUTAS PRODUCTO
 
 app.post("/producto",(req,res)=>{
+
   
-  const {codeProduct,categoria,name,unidades,
-    precioCompra,precioVenta,fechaVencimiento,mensaje
-  } = req.body
+  const {codeProduct,name,unidades,
+    precioCompra,precioVenta,fechaVencimiento,mensaje,id_categoria} = req.body;
+  console.log(req.body)
 
   db.run(`INSERT INTO producto(id,namep,unidades,
     precioc,preciov,fechaven,descripcion,id_categoria) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,[
       codeProduct,name,unidades,
-      precioCompra,precioVenta,fechaVencimiento,mensaje,categoria],(error,rows)=>{
+      precioCompra,precioVenta,fechaVencimiento,mensaje,id_categoria],(error,rows)=>{
       if (error) {
         console.log("Se produjo un error",error);
         res.json({messaje:"error al guardar los datos"})
@@ -194,6 +202,7 @@ app.post('/login',(req,res) =>{
 
          session = req.session;
          session.userid = correo;
+         
 
      return res.redirect("/dasboard")
     }
