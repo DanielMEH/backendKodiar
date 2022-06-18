@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require('body-parser')
 const sqlite3 = require("sqlite3")
 const path = require("path")
-const nodemailer = require("nodemailer")
+const nodemailer = require("nodemailer")  
 const bcrypt = require("bcrypt");
 const { render } = require("ejs");
 const { error, Console } = require("console");
@@ -11,8 +11,6 @@ const sessions = require('express-session');
 const app = express()
 const port = 3000;
 const db = new sqlite3.Database("./db/kodiar.db")
-
-
 // ? Settigs
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
@@ -31,8 +29,22 @@ app.get("/dasboard",(req,res)=>{
 
   session = req.session;
 
+  
   if (session.userid) {
-    res.render("dasboard")
+
+
+    db.get("SELECT * FROM usuario WHERE correo =$correo",{
+      $correo: session.userid
+      
+    },(err,rows)=>{
+      
+      if (err) {
+        return  res.status(500).redirect("/")
+      }
+      return res.status(200).render("dasboard",{user: rows})
+    })
+  
+   
 
   }else{
 
@@ -47,7 +59,7 @@ app.get('/inventario', (req, res) => {
   session = req.session;
 
   if (session.userid) {
-   
+
     res.render('inventario');
 
   }else{
@@ -62,27 +74,16 @@ app.get('/registro', (req, res) => {
 app.get('/', (req, res) => {
   res.render('login');
 })
-app.get("/producto",(req,res)=>{
+app.get("/producto", (req,res)=>{
   
   session = req.session;
-  
+ 
   if (session.userid) {
-    db.all(`
-    SELECT
-    
-      producto.id,
-      producto.namep,
-      producto.unidades,
-      producto.precioc,
-      producto.preciov,
-      producto.fechaven,
-      producto.descripcion,
-      categoria.nombre,
-      categoria.id_categoria
-    FROM producto
-     JOIN categoria ON producto.id_categoria = categoria.id_categoria ORDER BY producto.id DESC
-    
-    `,(error, rows)=>{
+
+    db.all(`SELECT * FROM  producto   WHERE idUsuario=$email `,{
+      $email: session.userid
+
+    },(error, rows)=>{
      
       if(error){
         console.log(error)
@@ -90,8 +91,8 @@ app.get("/producto",(req,res)=>{
         return res.send("Hubo un error al cargar los datos",error)
         
       }
-      console.log(rows)
       return res.render("product", {data:rows})
+      
     })
     
   }else{
@@ -101,6 +102,7 @@ app.get("/producto",(req,res)=>{
   }
 
 })
+
 app.get("/categoria",(req,res)=>{
 
   db.all("SELECT * FROM categoria",(error, rows)=>{
@@ -120,22 +122,23 @@ app.get("/cuenta",(req,res)=>{
 // RUTAS PRODUCTO
 
 app.post("/producto",(req,res)=>{
-
+  session = req.session;
   
+  console.log(req.body)
   const {codeProduct,name,unidades,
     precioCompra,precioVenta,fechaVencimiento,mensaje,id_categoria} = req.body;
   console.log(req.body)
 
   db.run(`INSERT INTO producto(id,namep,unidades,
-    precioc,preciov,fechaven,descripcion,id_categoria) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,[
+    precioc,preciov,fechaven,descripcion,id_categoria,idUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,[
       codeProduct,name,unidades,
-      precioCompra,precioVenta,fechaVencimiento,mensaje,id_categoria],(error,rows)=>{
+      precioCompra,precioVenta,fechaVencimiento,mensaje,id_categoria,session.userid],(error,rows)=>{
       if (error) {
         console.log("Se produjo un error",error);
-        res.json({messaje:"error al guardar los datos"})
+       return res.json({messaje:"error al guardar los datos"})
         
       }
-      res.redirect("/producto")
+     return  res.redirect("/producto")
       
     })
 })
@@ -191,15 +194,13 @@ app.post('/login',(req,res) =>{
    $correo:correo  
   }, (error, rows)=>{
     if(error){
-
       res.send("Hubo un error")
-
     } 
     
     if(rows){
+
       const passDB = rows.password
     if (bcrypt.compareSync(password, passDB)){
-
          session = req.session;
          session.userid = correo;
          

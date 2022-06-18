@@ -83,8 +83,10 @@
 
                     </div>
                     <div class="registro">
-                        <h3 class="title_product">Registro de   Productos</h3>
+                        <h3 class="title_product">Registro de </h3>
+                      
                         <div class="form_productos">
+                            
                             <div class="name">
                                 <label for="nombre">Nombre</label>
                                 <input type="text" id="nombre"  placeholder="name"
@@ -177,7 +179,9 @@
                 <tbody>
                     <tr>
                         
-                        <% if (data.length) {%>
+                        <% if (data) {%>
+
+                             
                             <% for (let product = 0; product < data.length; product++) { %>
                                 <tr>
                 <td ><%= data[product].id %>  </td>
@@ -196,7 +200,7 @@
                   </span>
                   <span class="delete">
 
-                    <a href="/deleteProduct">
+                    <a href="/deleteProduct/<%= data[product].id %>">
                         <i class="material-icons">delete</i>
                     </a>
                      
