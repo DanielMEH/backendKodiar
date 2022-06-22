@@ -24,7 +24,7 @@ app.use(sessions({
   cookie: { maxAge: timeEXp },
   resave: false 
 }));
-
+app.use(cookieParser())
 app.get("/dasboard",(req,res)=>{
 
   session = req.session;
@@ -80,10 +80,7 @@ app.get("/producto", (req,res)=>{
  
   if (session.userid) {
 
-    db.all(`SELECT * FROM  producto   WHERE idUsuario=$email `,{
-      $email: session.userid
-
-    },(error, rows)=>{
+    db.all(`SELECT * FROM  categoria `,(error, rows)=>{
      
       if(error){
         console.log(error)
