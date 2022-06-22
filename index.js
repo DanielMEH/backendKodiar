@@ -41,7 +41,9 @@ app.get("/dasboard",(req,res)=>{
       if (err) {
         return  res.status(500).redirect("/")
       }
-      return res.status(200).render("dasboard",{user: rows})
+
+      
+      return res.status(200).render("dasboard",{userUser: rows})
     })
   
    
@@ -52,6 +54,31 @@ app.get("/dasboard",(req,res)=>{
     res.redirect("/")
   }
 
+
+})
+
+app.get("/buscador",(req,res)=>{
+  session = req.session;
+  if (session.userid) {
+
+
+    db.all("SELECT * FROM producto",(err,rows)=>{
+      
+      if (err) {
+        return  res.status(500).redirect("/")
+      }
+
+      
+      return res.json({ data: rows})
+    })
+  
+   
+
+  }else{
+
+    
+    res.redirect("/")
+  }
 
 })
 app.get('/inventario', (req, res) => {
