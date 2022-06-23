@@ -1,0 +1,30 @@
+
+:root{
+
+   --fontz-size: 3.3rem;
+}
+
+.mockup-grid{
+
+   display: grid;
+   grid-template-columns: 36rem auto;
+}
+.figure{
+
+   width: 50rem;
+}
+.article .tittle{
+   font-size: var(--fontz-size);
+   line-height: 1;
+   max-width: 33rem;
+   font-weight: bold;
+   letter-spacing: 0.004em;
+   background: linear-gradient(#1aa7f8,#072a3e);
+   color: transparent;
+   text-shadow: 0px 2px 10px 9px #1a1b4a;
+   background-clip: text;
+   -webkit-background-clip: text;
+
+
+
+}

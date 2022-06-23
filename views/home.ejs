@@ -4,10 +4,70 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/ther.css">
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/fa98a09714.js" crossorigin="anonymous"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <title>kodiar</title>
 </head>
 <body>
-    
+   <header class="clas-container ">
+    <div class="max-w-7xl  flex m-auto justify-between items-center">
+        <div class="">
+            <nav class="">
+                <ul class="flex items-center">
+                    <li class="mx-4  inline-block text-3xl font-bold text-blue-500">Kodiar</li>
+                    <li><a href="" class="my-4 mx-3 border-b inline-block text-lg hover:border-blue-400 hover:text-white duration-200 p-3 hover:bg-blue-400 hover: rounded">Inicio</a></li>
+                    <li><a href="" class="my-4 mx-3 border-b inline-block text-lg hover:border-blue-400 hover:text-white duration-200 p-3 hover:bg-blue-400 hover: rounded">Contactanos</a></li>
+                    <li><a href="" class="my-4 mx-3 border-b inline-block text-lg hover:border-blue-400 hover:text-white duration-200 p-3 hover:bg-blue-400 hover: rounded">Quienes somos</a></li>
+                    <li><a href="" class="my-4 mx-3 border-b inline-block text-lg hover:border-blue-400 hover:text-white duration-200 p-3 hover:bg-blue-400 hover: rounded">Ayuda</a></li>
+                </ul>
+    </nav>
+        </div>
+        <div>
+            <span><a href="/login" class="m-4 inline-block text-blue-500  rounded rounded-br-lg rounded-tl-lg text-lg p-1.5 duration-100 hover:text-blue-400">Iniciar sesión</a></span>
+            <span><a href="/registro" class="m-4 inline-block text-blue-500 border border font-medium hover:border-blue-500  rounded hover:text-blue-600 p-2 text-lg duration-100 hover:scale-105">Registrarse </a></span>
+
+        </div>
+    </div>
+   </header>
+   <main>
+    <div class="max-w-7xl m-auto mockup-grid">
+        <div class=" mt-20">
+            <article class="article">
+                <h1 class="tittle ">Empieza a crear tu inventario
+                    para llevar un mejor manejo de tus productos
+                </h1>
+                <p class="mt-3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor nam unde cum doloribus ullam mollitia sapiente deleniti qui ducimus accusamus dolore quas impedit, laudantium dolores pariatur molestiae sit vitae quam.</p>
+                <div class="text-green-600 mt-2">100% Gratuito</div>
+                <span><a class="border border-2 border-black rounded hover:bg-black hover:text-white
+                     my-4 inline-block duration-200
+                    p-3" href="/contactar">Contactar con nosotros</a></span>
+                    <span><a class="border border-2 border-black rounded hover:bg-black hover:text-white
+                        my-4 inline-block duration-200
+                        p-3" href="/registro">Crear cuenta <i class="fa-solid fa-arrow-right"></i></a></span>
+            </article>
+        </div>
+        <div class=" mt-20  relative">
+            <picture data-aos="fade-right">
+                <figure class="figure">
+                    <img class="mockup"  src="https://res.cloudinary.com/dkqp3wkbi/image/upload/v1655936652/kodiarLogo/mockup_exornh.png" alt="kodiar" title="kodiar">
+                </figure>
+            </picture>
+        </div>
+    </div>
+    <div class="wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+  <path fill="#0099ff" fill-opacity="0.8" d="M0,160L80,138.7C160,117,320,75,480,96C640,117,800,203,960,218.7C1120,235,1280,181,1360,154.7L1440,128L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+</svg>
+    </div>
+   </main>
+   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+   <script>
+      AOS.init({
+          duration:1500
+      });
+    </script>
 </body>
 </html>

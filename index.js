@@ -55,8 +55,41 @@ app.get("/dasboard",(req,res)=>{
   }
 
 
-})
+});
+app.get('/inventario', (req, res) => {
 
+  session = req.session;
+
+  if (session.userid) {
+    
+    db.all(`SELECT producto.namep, producto.unidades, producto.precioc, producto.preciov, producto.fechaven, producto.descripcion, producto.id_categoria,
+     producto.idUsuario, producto.id, categoria.id_categoria, categoria.nombre, categoria.imagen FROM producto INNER JOIN categoria ON producto.id = categoria.id_categoria
+     WHERE producto.idUsuario=$idemail`,{
+      $idemail:session.userid
+     },(error,rows)=>{
+      if (error) {
+        
+        return res.send("hubo un error")
+        
+      }else{
+        return res.render("inventario",{data:rows})
+      }
+    })
+
+  
+  }else{
+
+    
+   
+  }
+});
+
+
+app.get("/",(req,res)=>{
+
+  res.render("home")
+
+})
 app.get("/buscador",(req,res)=>{
   session = req.session;
   if (session.userid) {
@@ -98,7 +131,7 @@ app.get('/inventario', (req, res) => {
 app.get('/registro', (req, res) => {
   res.render('registro');
 })
-app.get('/', (req, res) => {
+app.get('/login', (req, res) => {
   res.render('login');
 })
 app.get("/producto", (req,res)=>{
@@ -107,7 +140,9 @@ app.get("/producto", (req,res)=>{
  
   if (session.userid) {
 
-    db.all(`SELECT * FROM  categoria `,(error, rows)=>{
+    db.all(`SELECT * FROM  categoria WHERE idusuario =$email`,{
+      $email:session.userid
+    },(error, rows)=>{
      
       if(error){
         console.log(error)
@@ -129,7 +164,10 @@ app.get("/producto", (req,res)=>{
 
 app.get("/categoria",(req,res)=>{
 
-  db.all("SELECT * FROM categoria",(error, rows)=>{
+  session = req.session;
+  db.all(`SELECT * FROM categoria WHERE idusuario=$email`,{
+    $email:session.userid
+  },(error, rows)=>{
     
     res.render("categorias",{data:rows})
     
@@ -204,7 +242,7 @@ app.post("/register",(req,res)=>{
         }).catch((err) =>{console.log(err)});
     
   
-       res.redirect("/")
+       res.redirect("/login")
           
 
         })
@@ -242,11 +280,13 @@ app.post('/login',(req,res) =>{
 })
 
 app.post("/categoria", (req,res) =>{
+  session = req.session;
+  
   const {nombre, imagen} = req.body;
   console.log(nombre, imagen)
   
-  db.run(`INSERT INTO categoria(nombre,imagen) VALUES (?, ?)`,
-  [nombre, imagen],(error,rows)=>{
+  db.run(`INSERT INTO categoria(nombre,imagen,idusuario) VALUES (?, ?, ?)`,
+  [nombre, imagen,session.userid],(error,rows)=>{
     if (error) {
        res.send("error")
       console.log("error",error)  

@@ -7,8 +7,33 @@
 }
 
 :root{
+    --primary-color:white;
+    --secondary-color:rgb(61,68,73);
+    --highlight-color:#1aa7f8;
 
+    --dt-status-available-color:greenyellow;
+    --dt-status-away-color:lightsalmon;
+    --dt-status-offline-color:lightgray;
+
+    --dt-padding:12px;
+    --dt-padding-s:6px;
+    --dt-padding-xs:2px;
     --color-text:#1aa7f8;
+
+    --dt-border-radius:3px;
+
+    --dt-background-color-container: #ffffff;
+    --dt-border-color:var(--secondary-color);
+    --dt-bg-color:var(--highlight-color);
+    --dt-text-color:var(--primary-color);
+    --dt-bg-active-button:var(--highlight-color);
+    --dt-text-color-button:var(--primary-color);
+    --dt-text-color-active-button:var(--primary-color);
+    --dt-hover-cell-color:var(--highlight-color);
+    --dt-even-row-color:var(--secondary-color);
+    --dt-focus-color:var(--highlight-color);
+    --dt-input-background-color:var(--secondary-color);
+    --dt-input-color:var(--primary-color);
 }
 body{
     background: #f0f2f5;
@@ -30,7 +55,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 0 auto;
     padding: 0.67rem;
 }
@@ -119,34 +144,207 @@ body{
     margin: 2px;
    
 }
-td{
-    width: 300px;
-    height: 30px;
-    box-shadow: 5px #1aa7f8;
+.material-icons{
+    font-size:16px;
 }
-th{
-    height: 50px; 
-    display: table-cell;
-    vertical-align: inherit;
-    font-weight: bold;
-    margin: 20px;
-    background-color: #1aa7f8;
+.datatable-container{
+    background:var(--dt-background-color-container);
+    border-radius:var(--dt-border-radius);
+    color: #000;
+
+    max-width: 1200px;
+    margin: 4rem auto;
+    font-size:12px;
+    border-radius: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0px 0px 15px 10px rgb(241, 241, 241);
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+}
+.datatable-container .header-tools{
+    border-bottom:solid 1px var(--dt-border-color);
+    padding:var(--dt-padding);
+    display:flex;
+    align-items:baseline;
+    justify-content: space-between;
+}
+.datatable-container .header-tools .search{
+    width: 250px;
+  
+}
+.datatable-container .header-tools .search .search-input{
+    width:100%;
+    background-color: #fff;
+    display:block;
+    box-sizing:border-box;
+    padding: 8px;
+    border-radius: 6px;
+    border:solid 1px var(--dt-border-color);
+    color: #000;
+    outline: none;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+.datatable-container .header-tools .tools{
+  width:70%;
+}
+.datatable-container .header-tools .tools ul{
+  margin:0;
+  padding:0;
+  display:flex;
+  justify-content:start;
+  align-items:baseline;
+}
+.datatable-container .header-tools .tools ul li{  
+    display:inline-block;
+   margin:0 var(--dt-padding-xs);
+   align-items:baseline;
+   color: #000;
+}
+.datatable-container .footer-tools{
+   padding:var(--dt-padding);
+   display:flex;
+   align-items:baseline;
+}
+.datatable-container .footer-tools .list-items{
+    width:50%;
+}
+.datatable-container .footer-tools .pages{
+    margin-left:auto;
+    margin-right:0;
+    width:50%;
+}
+.datatable-container .footer-tools .pages ul{
+    margin:0;
+    padding:0;
+    display:flex;
+    align-items:baseline;
+    justify-content:flex-end;
+}
+.pages ul li {
+    list-style: none;
+    margin: 4px;
+    color: #fff;
+}
+.datatable-container.footer-tools .pages ul li{
+   display:inline-block;
+ 
+   list-style: none;
+}
+.datatable-container .footer-tools .pages ul li button,
+.datatable-container .header-tools .tools ul li button{
+   color:var(--dt-text-color-button);
+   width:100%;
+   box-sizing:border-box;
+   border:0;
+   border-radius:var(--dt-border-radius);
+   background:transparent;
+   cursor:pointer;
+   list-style: none;
+   color: #fff;
+   -webkit-border-radius:var(--dt-border-radius);
+   -moz-border-radius:var(--dt-border-radius);
+   -ms-border-radius:var(--dt-border-radius);
+   -o-border-radius:var(--dt-border-radius);
+}
+.datatable-container .footer-tools .pages ul li button:hover,
+.datatable-container .header-tools .tools ul li button:hover{
+   background:var(--dt-bg-active-button);
+   color:var(--dt-text-color-active-button);
+   border-radius: 0.3rem;
+   -webkit-border-radius: 0.3rem;
+   -moz-border-radius: 0.3rem;
+   -ms-border-radius: 0.3rem;
+   -o-border-radius: 0.3rem;
 }
 
-.tr{
-    display: inline-flex;
+.datatable-container .footer-tools .pages  > ul > li > button.active{
+    background:var(--dt-bg-color);
+    color: #fff;
+    border-radius:var(--dt-border-radius);
 }
-.caja-mayor{
-    margin: 50px;
+.datatable-container .footer-tools .pages ul li button,
+.datatable-container .footer-tools .pages ul li span,
+.datatable-container .header-tools .tools ul li button{
+   padding:var(--dt-padding-s) var(--dt-padding);
 }
-table{
-    border-radius: 5px;
-    border-color: #1aa7f8;
+.datatable-container .datatable{
+    border-collapse: collapse;
+    width: 100%;
 }
-select{
-    background-color: #1aa7f8;
-    border-color: #1aa7f8;
+.datatable-container .footer-tools .pages ul li button,
+.datatable-container .footer-tools .pages ul li span,
+.datatable-container .header-tools .tools ul li button{
+   padding: var(--dt-padding-s) var(--dt-padding);
+   color: #000;
+
 }
-option{
+.datatable-container .datatable th{
+    font-weight:bolder;
+    text-align:left;
+    border-bottom:solid 1px var(--dt-border-color);
+    text-transform: uppercase;
+    margin: 0.20rem;
+    
+}
+.span_tittle{
+
+    margin: 6px;
+    font-size: 14px;
+    font-weight: bold;
+
+}
+.footer-tools select{
+    border: 1px solid #1a1b2a;
     background: #fff;
+    border-radius: 3px;
+    padding: 5px;
+    outline: none;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+}
+table thead  th{
+    padding: 10px;
+}
+
+.footer-tools select option{
+    padding: 10px;
+    display: inline-block;
+}
+table tbody td{
+    padding: 10px;
+}
+.datatable-container .datatable td{
+   border-bottom:solid 1px var(--dt-border-color);
+}
+.datatable-container .datatable tbody tr:nth-child(event){
+   background-color:var(--dt-even-row-color);
+}
+
+.option {
+  
+    display: flex;
+    justify-content: space-between;
+
+
+}
+
+.option .options i{
+
+    font-size: 1.30rem;
+    background: red;
+    padding: 0.40em;
+    border-radius: 5px;
+    color: #fff;
+    
+}
+.option .options .op1{
+
+    background: darkgreen;
 }

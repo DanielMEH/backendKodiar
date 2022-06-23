@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +7,7 @@
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <link rel="stylesheet" href="/css/inventario.css">
     <script src="https://kit.fontawesome.com/fa98a09714.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <title>KODIAR</title>
 </head>
@@ -16,83 +16,148 @@
     <header class="container">
         <div class="container_hero">
             <div class="title">kodiar</div>
-            <div class="navegate">
-                <nav class="nav_link">
-                    <ul class="list">
-                        <div class="notificacion">
-                            <i class="fa-solid fa-bell"></i>
-                        </div>
-                       <li><a  href="/dasboard">Inicio</a></li>
-                        <li><a class="inventario cate_active" href="/inventario">Inventario</a></li>
+        <div class="navegate">
+            <nav class="nav_link">
+                <ul class="list">
+                    <div class="notificacion">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <li>
+                    <a class="iventario cate_active" href="/dasboard">Inicio</a></li>
+                        <li><a href="/inventario">Inventario</a></li>
                         <li><a href="/categoria">Categorias</a></li>
                         <li><a href="/producto">productos</a></li>
                         <li><a href="/cuenta">Cuenta</a></li>
                         <li><a href="/logout">Cerrar sesión</a></li>
-                    </ul>
-                </nav>
+                </ul>
+            </nav>
+
+        </div>
+        </div>
+
     </header>
-    <div class="caja-mayor">
-        <table BORDER>
-            <tr>
-            <th>
-                    <select name="titulos">
-                    <option value="">CODIGO</option>
-                    <option value="">EJEMPLO</option>
-                    <option value="">EJEMPLO</option>
-                    <option value="">EJEMPLO</option>
-                    </select>
-                </th>
-            <th>
-                    <select name="titulos">
-                    <option value="">PRODUCTO</option>
-                    <option value="">EJEMPLO</option>
-                    <option value="">EJEMPLO</option>
-                    <option value="">EJEMPLO</option>
-                </select>
-            </th>
-            <th>
-                    <select name="titulos">
-                    <option value="">DESCRIPCION</option>
-                    <option value="">EJEMPLO</option>
-                    <option value="">EJEMPLO</option>
-                    <option value="">EJEMPLO</option>
-                </select>
-            </th>
-            <th>
-                    <select name="titulos">
-                    <option value="">STOCK INICIAL</option>
-                    <option value="">EJEMPLO</option>
-                    <option value="">EJEMPLO</option>
-                    <option value="">EJEMPLO</option>
-                </select>
-            </th>
-            <th>
-                    <select name="titulos">
-                    <option value="">ENTRADAS</option>
-                    <option value="">EJEMPLO</option>
-                    <option value="">EJEMPLO</option>
-                    <option value="">EJEMPLO</option>
-                </select>
-            </th>
-            <th>
-                    <select name="titulos">
-                    <option value="">SALIDAS</option>
-                    <option value="">EJEMPLO</option>
-                    <option value="">EJEMPLO</option>
-                    <option value="">EJEMPLO</option>
-                </select>
-            </th>
-            <th>
-                    <select name="titulos">
-                    <option value="">TOTAL</option>
-                    <option value="">EJEMPLO</option>
-                    <option value="">EJEMPLO</option>
-                    <option value="">EJEMPLO</option>
-                </select>
-            </th>
-            </tr>
-        
+    <div class="datatable-container">
+        <div class="header-tools">
+            <div class="tools">
+                <ul>
+                    <li><span><input type="checkbox"></span></li>
+                    <li>
+                        <button>
+                            <i class="material-icons">edit</i>
+                        </button>
+                    </li>
+                    <li>
+                        <button>
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="search">
+                <input type="text" name="" id="" class="search-input"
+                placeholder="Buscar...">
+
+            </div>
+        </div>
+        <table class="datatable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>codigo</th>
+                    <th>Producto</th>
+                    <th>categoria</th>
+                    <th>stock inicial</th>
+                    <th>precio compra</th>
+                    <th>precio venta</th>
+                    <th>fecha de vencimiento</th>
+                    <th>Vendidos</th>
+                    <th>Productos restantes</th>
+                    <th>Ajustes</th>
+
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <% if(data.length){ %>
+
+                    <% for (let inv = 0; inv < data.length; inv++) { %>
+                        
+                         <tr>
+                            <td class="table-checkbox"> <input type="checkbox" name="" id="">
+                            <span class="available"></span></td>
+                            <td><%= data[inv].id  %></td>
+                            <td><%= data[inv].namep  %></td>
+                            <td><%= data[inv].nombre  %></td>
+                            <td>15</td>
+                            <td><%= data[inv].precioc  %></td>
+                            <td><%= data[inv].preciov  %></td>
+                            <td><%= data[inv].fechaven  %></td>
+                            <td>50</td>
+                            <td>30</td>
+                            <td>
+                               <div class="option">
+                                <a href="edit/<%= data[inv].id  %> " class="options"><i class="op1 fa-solid fa-pen-to-square"></i></a>
+                                <a href="" class="options"><i class="op2 fa-solid fa-trash"></i></a>
+
+                               </div>
+                            </td>
+                            
+                        </tr>
+                        
+
+                  <%  } %>
+                     
+
+
+               <% }else{ %>
+                <tr>
+                    <td></td>
+                    <td>No tienes productos agregados</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+
+                </tr>
+
+                <% } %>
+      
+            </tbody>
         </table>
+        <div class="footer-tools">
+            <div class="list-items">
+               <span  class="span_tittle">Mostrar </span>
+                <select name="n-entries"id="n-enties"class="n-entries">
+                    <option value="15">5</option>
+                    <option value="10"selected>10</option>
+                    <option value="15">15</option>
+                </select>
+                <span class="span_tittle">
+                    Registros
+                </span>
+            </div>
+            <div class="pages">
+                <div class="pages">
+                    <ul>
+                  
+                        <li><button class="active">1</button></li>
+                        <li><button>2</button></li>
+                        <li><button>3</button></li>
+                        <li><span><i class="fas fa-angle-right"></i></span></li>
+                        
+                    </ul>
+</div>
+            </div>
+        </div>
     </div>
+
 </body>
+
 </html>

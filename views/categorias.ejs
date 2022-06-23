@@ -62,16 +62,19 @@
         <div class="title_main">Categorias</div>
 <div class="contaner_min">
 
-    <% if(data) {  %>
+    <% if(data.length) {  %>
 
         <% for(let i = 0; i < data.length; i++){ %>
 
             <h1><%=  data[i].nombre %></h1>
-            <h1><%=  data[i].id_categoria %></h1>
+            
           
             <% } %>
 
-        <% } %>
+        <% }else{ %>
+            <h1>No tienes categorias</h1>
+
+       <% } %>
     
 
     <section class="menu_categoria bebes">
