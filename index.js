@@ -69,10 +69,10 @@ app.get('/inventario', (req, res) => {
      },(error,rows)=>{
       if (error) {
         
-        return res.send("hubo un error")
+        return res.status(501).send("hubo un error")
         
       }else{
-        return res.render("inventario",{data:rows})
+        return res.status(200).render("inventario",{data:rows})
       }
     })
 
@@ -214,32 +214,30 @@ app.post("/register",(req,res)=>{
      const saltRounds = 10;
      const encriptar =  bcrypt.genSaltSync(saltRounds);
      const hash = bcrypt.hashSync(password, encriptar);
-     console.log("encriptado",hash)
-
       db.run(`INSERT INTO usuario(documento,nombre,correo,password) VALUES(?, ?, ?, ?)`,
       [documento,nombre,correo,hash], async(error, rows)=>{
         if(error){
           console.log("se produjo un error al guardar sus datos",error)
         }
-         console.log("data save",rows)
+
         const transporter = nodemailer.createTransport({
           host: 'smtp.gmail.com',
           port: 587,
           auth: {
-              user: 'kodiarEnterpres@gmail.com',
-              pass: 'nqcmsukadpvctxhs'
+              user: 'kodiarenterprese@gmail.com',
+              pass: 'xbpuhsbnccyfspgk'
           }
         });
         
         // send email
         await  transporter.sendMail({
-          from: 'kodiarEnterpres@gmail.com',
+          from: 'kodiarenterprese@gmail.com',
           to: correo,
           subject: 'Test Email Subject',
-          html: '<h1 style="color: red;">hola profe SOY KODIAR</h1> <img src="https://3con14.biz/js">'
+          html: 'hola bienbenido',
         }).then((res) =>{
           console.log(res)
-        }).catch((err) =>{console.log(err)});
+        }).catch((err) =>{console.log("Error",err)});
     
   
        res.redirect("/login")
