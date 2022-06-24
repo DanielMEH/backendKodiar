@@ -182,7 +182,6 @@ app.get("/cuenta",(req,res)=>{
 
 
 // RUTAS PRODUCTO
-
 app.post("/producto",(req,res)=>{
   session = req.session;
   
@@ -203,6 +202,11 @@ app.post("/producto",(req,res)=>{
      return  res.redirect("/producto")
       
     })
+})
+
+//RUTA DE QUIENES SOMOS
+app.get("/nosotros" , (req,res)=>{
+  res.render("somos")
 })
 
 
