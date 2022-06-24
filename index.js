@@ -8,6 +8,7 @@ const { render } = require("ejs");
 const { error, Console } = require("console");
 const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
+const { body,  validationResult  } = require("express-validator")
 const app = express()
 const port = 3000;
 const db = new sqlite3.Database("./db/kodiar.db")
@@ -210,44 +211,67 @@ app.get("/nosotros" , (req,res)=>{
 })
 
 
-app.post("/register",(req,res)=>{
-     let documento = req.body.documento
-     let nombre= req.body.nombre
-     let correo = req.body.correo
-     let password = req.body.password
-     const saltRounds = 10;
-     const encriptar =  bcrypt.genSaltSync(saltRounds);
-     const hash = bcrypt.hashSync(password, encriptar);
-      db.run(`INSERT INTO usuario(documento,nombre,correo,password) VALUES(?, ?, ?, ?)`,
-      [documento,nombre,correo,hash], async(error, rows)=>{
-        if(error){
-          console.log("se produjo un error al guardar sus datos",error)
-        }
+app.post("/register",[
+  body('nombre', 'El nombre no es valido asegurate de que no tenga caracteres especiales y no este vacio')
+      .exists()
+      .isLength({min:5}),
+  body('documento', 'El documento no es valido asegurate de que tenga mas de 10 numeros y no este vacio')
+      .exists()
+      .isLength({min:5}),
+  body('correo', 'El correo no es valido asegurate de que no este vacio y este bien escrito')
+      .exists()
+      .isEmail(),
+  body('password', 'la contraseña no es valida')
+      .exists()
+      .isLength({min:5})
+],(req,res)=>{
 
-        const transporter = nodemailer.createTransport({
-          host: 'smtp.gmail.com',
-          port: 587,
-          auth: {
-              user: 'kodiarenterprese@gmail.com',
-              pass: 'xbpuhsbnccyfspgk'
-          }
-        });
-        
-        // send email
-        await  transporter.sendMail({
-          from: 'kodiarenterprese@gmail.com',
-          to: correo,
-          subject: 'Test Email Subject',
-          html: 'hola bienbenido',
-        }).then((res) =>{
-          console.log(res)
-        }).catch((err) =>{console.log("Error",err)});
+  const errors = validationResult(req)
+  if(!errors.isEmpty()){
     
-  
-       res.redirect("/login")
-          
+    const valores = req.body;
+    const validacion = errors.array()
+    return res.render("registro",{validacion:validacion, valores:valores})
+  }else{ 
+    let documento = req.body.documento
+    let nombre= req.body.nombre
+    let correo = req.body.correo
+    let password = req.body.password
+   const saltRounds = 10;
+   const encriptar =  bcrypt.genSaltSync(saltRounds);
+   const hash = bcrypt.hashSync(password, encriptar);
+    db.run(`INSERT INTO usuario(documento,nombre,correo,password) VALUES(?, ?, ?, ?)`,
+    [documento,nombre,correo,hash], async(error, rows)=>{
+      if(error){
+        console.log("se produjo un error al guardar sus datos",error)
+      }
 
-        })
+      const transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        auth: {
+            user: 'kodiarenterprese@gmail.com',
+            pass: 'xbpuhsbnccyfspgk'
+        }
+      });
+      
+      // send email
+      await  transporter.sendMail({
+        from: 'kodiarenterprese@gmail.com',
+        to: correo,
+        subject: 'Test Email Subject',
+        html: 'hola bienbenido',
+      }).then((res) =>{
+        console.log(res)
+      }).catch((err) =>{console.log("Error",err)});
+  
+     console.log("datos insertados")
+     res.redirect("/login")
+        
+
+      })
+    }
+  
 })
 
 console.log(db)
@@ -258,7 +282,7 @@ app.post('/login',(req,res) =>{
    $correo:correo  
   }, (error, rows)=>{
     if(error){
-      res.send("Hubo un error")
+      res.send("<script>alert('El correo o contraseña no existe') window.location = '/login' </script>")
     } 
     
     if(rows){
@@ -271,9 +295,10 @@ app.post('/login',(req,res) =>{
 
      return res.redirect("/dasboard")
     }
+   
     }
 
-     return res.send("la contraseña o correo in correca")
+    res.send("<script>alert('El correo o contraseña no existe'); window.location = '/login' </script>")
     
 
 
@@ -316,6 +341,14 @@ app.get("/logout",(req,res)=>{
   }
 })
 
+app.get("/contactanos",(req,res)=>{
+
+  res.render("contactanos")
+})
+app.get("/ayuda",(req,res)=>{
+
+  res.render("ayuda")
+})
 app.listen(port, (req,res) => {
      console.log("Listening on port",port)
 })

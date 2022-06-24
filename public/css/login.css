@@ -15,14 +15,14 @@ body{
     background-size: cover;
     height: 100vh;
 }
-.container .title{
+.container_d .title{
     font-size: 2rem;
     margin: 0 2rem;
     font-weight: bold;
     padding: 6px;
 }
 
-.container{
+.container_d{
     position: relative;
     background-color:rgba(255, 255, 255, 0.457);
     backdrop-filter: blur(2px);
@@ -145,6 +145,12 @@ max-width: 500px;
     
       opacity: 0.90;
   }
+.udhtes{
 
+    position: absolute;
+    top: 4rem;
+
+    right: 4rem;
+}
   
  

@@ -9,6 +9,10 @@
    display: grid;
    grid-template-columns: 36rem auto;
 }
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+*{
+   font-family: 'Roboto', sans-serif;
+}
 .figure{
 
    width: 50rem;
@@ -27,4 +31,41 @@
 
 
 
+}
+.content-k {
+   display: grid;
+   grid-template-columns: 38rem auto;
+
+}
+.content-k{
+
+   position: relative;
+}
+.mk-kodiar::before{
+
+   content: "";
+   height: 700px;
+   width: 3px;
+   background: #1aa7f8;
+   position: absolute;
+   top: 1.2rem;
+   left: -2rem;
+
+}
+.mk-kodiar::after{
+
+   content: "";
+   height: 20px;
+   width: 20px;
+   background: #1aa7f8;
+   position: absolute;
+   top: 1.31rem;
+   left: -2.51rem;
+   transform: rotate(45deg);
+   box-shadow: 170px 170px #1aa7f8,  293px 293px #1aa7f8, 385px 385px #1aa7f8;
+
+}
+.wave {
+
+   margin-top: -7rem;
 }
