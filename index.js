@@ -60,7 +60,6 @@ app.get("/dasboard",(req,res)=>{
 app.get('/inventario', (req, res) => {
 
   session = req.session;
-
   if (session.userid) {
     
     db.all(`SELECT producto.namep, producto.unidades, producto.precioc, producto.preciov, producto.fechaven, producto.descripcion, producto.id_categoria,
@@ -166,6 +165,7 @@ app.get("/producto", (req,res)=>{
 app.get("/categoria",(req,res)=>{
 
   session = req.session;
+
   db.all(`SELECT * FROM categoria WHERE idusuario=$email`,{
     $email:session.userid
   },(error, rows)=>{
@@ -306,12 +306,24 @@ app.post('/login',(req,res) =>{
 
 })
 
-app.post("/categoria", (req,res) =>{
-  session = req.session;
+app.post("/categoria", [
+
+  body("nombre", "El campo no puede estar vacio")
+  .exists()
+  .isLength({min:4})
+], (req,res) =>{
   
+  
+  const errorCategoria = validationResult(req)
+  if (!errorCategoria.isEmpty()) {
+    
+    return res.status(400).send(errorCategoria.array())
+    
+  }
+  session = req.session;
   const {nombre, imagen} = req.body;
   console.log(nombre, imagen)
-  
+
   db.run(`INSERT INTO categoria(nombre,imagen,idusuario) VALUES (?, ?, ?)`,
   [nombre, imagen,session.userid],(error,rows)=>{
     if (error) {

@@ -37,6 +37,10 @@
    grid-template-columns: 38rem auto;
 
 }
+.content-ks{
+   display: grid;
+   grid-template-columns: 60rem auto;
+}
 .content-k{
 
    position: relative;
