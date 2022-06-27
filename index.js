@@ -183,26 +183,63 @@ app.get("/cuenta",(req,res)=>{
 
 
 // RUTAS PRODUCTO
-app.post("/producto",(req,res)=>{
-  session = req.session;
-  
-  console.log(req.body)
-  const {codeProduct,name,unidades,
-    precioCompra,precioVenta,fechaVencimiento,mensaje,id_categoria} = req.body;
-  console.log(req.body)
+app.post("/producto",[
+  body("codeProduct","Ingresa el codigo del producto")
+  .exists()
+  .isLength({min: 1}),
+  body("name","El nombre debe ser obligatorio")
+  .exists()
+  .isLength({min: 1}),
+  body("unidades","debes ingresar el numero de unidades")
+  .exists()
+  .isLength({min: 1}),
+  body("precioCompra", "Ingresa el precio de compra")
+  .exists()
+  .isLength({min: 1}),
+  body("precioVenta", "Ingresa el precio de venta")
+  .exists()
+  .isLength({min: 1}),
+  body("fechaVencimiento", "Ingresa la fecha de vencimiento")
+  .exists()
+  .isLength({min: 1}),
+  body("id_categoria", "Debes elegir en que categoria se va a guardar el producto")
+  .exists()
+  .isLength({min: 1}),
 
-  db.run(`INSERT INTO producto(id,namep,unidades,
-    precioc,preciov,fechaven,descripcion,id_categoria,idUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,[
-      codeProduct,name,unidades,
-      precioCompra,precioVenta,fechaVencimiento,mensaje,id_categoria,session.userid],(error,rows)=>{
-      if (error) {
-        console.log("Se produjo un error",error);
-       return res.json({messaje:"error al guardar los datos"})
+],(req,res)=>{
+  
+  const errorProductDate = validationResult(req)
+  if (!errorProductDate.isEmpty()) {
+    
+    const valores = req.body;
+    const productError = errorProductDate.array()
+    
+      return res.render("Errors",{productError:productError})
+
+  } else {
+    
+    session = req.session;
+    const {codeProduct,name,unidades,
+      precioCompra,precioVenta,fechaVencimiento,mensaje,id_categoria} = req.body;
+   
+  
+    db.run(`INSERT INTO producto(id,namep,unidades,
+      precioc,preciov,fechaven,descripcion,id_categoria,idUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,[
+        codeProduct,name,unidades,
+        precioCompra,precioVenta,fechaVencimiento,mensaje,id_categoria,session.userid],(error,rows)=>{
+        if (error.code == "SQLITE_CONSTRAINT") {
+          console.log("Se produjo un error",error);
+
+         return res.send("<script>alert('Hubo un error al guardar el producto'); window.location = '/producto'</script>")
+          
+        }else{
+
+          return res.send("<script>alert('Producto registrado exitosamente'); window.location = '/producto'</script>")
+        }
+
         
-      }
-     return  res.redirect("/producto")
-      
-    })
+      })
+  }
 })
 
 //RUTA DE QUIENES SOMOS
@@ -217,7 +254,7 @@ app.post("/register",[
       .isLength({min:5}),
   body('documento', 'El documento no es valido asegurate de que tenga mas de 10 numeros y no este vacio')
       .exists()
-      .isLength({min:5}),
+      .isLength({min:8}),
   body('correo', 'El correo no es valido asegurate de que no este vacio y este bien escrito')
       .exists()
       .isEmail(),
@@ -242,32 +279,40 @@ app.post("/register",[
    const hash = bcrypt.hashSync(password, encriptar);
     db.run(`INSERT INTO usuario(documento,nombre,correo,password) VALUES(?, ?, ?, ?)`,
     [documento,nombre,correo,hash], async(error, rows)=>{
-      if(error){
-        console.log("se produjo un error al guardar sus datos",error)
-      }
 
-      const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        auth: {
-            user: 'kodiarenterprese@gmail.com',
-            pass: 'xbpuhsbnccyfspgk'
-        }
-      });
-      
-      // send email
-      await  transporter.sendMail({
-        from: 'kodiarenterprese@gmail.com',
-        to: correo,
-        subject: 'Test Email Subject',
-        html: 'hola bienbenido',
-      }).then((res) =>{
-        console.log(res)
-      }).catch((err) =>{console.log("Error",err)});
+      if (!error) {
+        console.log("datos insertados")
+        return res.redirect("/login")
+      }else{
+
+        if( error.code == 'SQLITE_CONSTRAINT'){
+          return res.send("<script>alert('Este usuario ya existe'); window.location = '/registro'</script>")
   
-     console.log("datos insertados")
-     res.redirect("/login")
-        
+        }
+      }
+      
+       
+
+     
+
+      // const transporter = nodemailer.createTransport({
+      //   host: 'smtp.gmail.com',
+      //   port: 587,
+      //   auth: {
+      //       user: 'kodiarenterprese@gmail.com',
+      //       pass: 'xbpuhsbnccyfspgk'
+      //   }
+      // });
+      
+      // // send email
+      // await  transporter.sendMail({
+      //   from: 'kodiarenterprese@gmail.com',
+      //   to: correo,
+      //   subject: 'Test Email Subject',
+      //   html: 'hola bienbenido',
+      // }).then((res) =>{
+      //   console.log(res)
+      // }).catch((err) =>{console.log("Error",err)});
 
       })
     }
@@ -313,32 +358,39 @@ app.post("/categoria", [
   .isLength({min:4})
 ], (req,res) =>{
   
-  
   const errorCategoria = validationResult(req)
   if (!errorCategoria.isEmpty()) {
     
-    return res.status(400).send(errorCategoria.array())
+    const valores = req.body;
+    const validacion = errorCategoria.array()
+    return res.render("ErrorCategoria",{validacion:validacion, valores:valores})
+   
     
+  }else{
+
+    session = req.session;
+    const {nombre, imagen} = req.body;
+  
+    db.run(`INSERT INTO categoria(nombre,imagen,idusuario) VALUES (?, ?, ?)`,
+    [nombre, imagen,session.userid],(error,rows)=>{
+      if (error) {
+        return  res.send("error")
+       
+      }else{
+        
+        res.send("<script>alert('Categoria registrada exitosamente'); window.location = '/categoria'</script>")
+      }
+  
+    })
   }
-  session = req.session;
-  const {nombre, imagen} = req.body;
-  console.log(nombre, imagen)
-
-  db.run(`INSERT INTO categoria(nombre,imagen,idusuario) VALUES (?, ?, ?)`,
-  [nombre, imagen,session.userid],(error,rows)=>{
-    if (error) {
-       res.send("error")
-      console.log("error",error)  
-    }else{
-      console.log("save data")
-      res.redirect("/categoria")
-    }
-
-  })
   
 
 })
 
+app.get("ErrorCategoria.ejs",(req,res)=>{
+
+  res.render("ErrorCategoria")
+})
 app.get("/logout",(req,res)=>{
 
   session = req.session;
@@ -360,6 +412,10 @@ app.get("/contactanos",(req,res)=>{
 app.get("/ayuda",(req,res)=>{
 
   res.render("ayuda")
+})
+app.get("/error",(req,res)=>{
+
+  res.render("Errors")
 })
 app.listen(port, (req,res) => {
      console.log("Listening on port",port)
