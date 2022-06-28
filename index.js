@@ -102,7 +102,7 @@ app.get("/buscador",(req,res)=>{
       }
 
       
-      return res.json({ data: rows})
+      return res.json({"data":rows})
     })
   
    
@@ -222,20 +222,22 @@ app.post("/producto",[
     const {codeProduct,name,unidades,
       precioCompra,precioVenta,fechaVencimiento,mensaje,id_categoria} = req.body;
    
-  
     db.run(`INSERT INTO producto(id,namep,unidades,
       precioc,preciov,fechaven,descripcion,id_categoria,idUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,[
         codeProduct,name,unidades,
         precioCompra,precioVenta,fechaVencimiento,mensaje,id_categoria,session.userid],(error,rows)=>{
-        if (error.code == "SQLITE_CONSTRAINT") {
-          console.log("Se produjo un error",error);
 
-         return res.send("<script>alert('Hubo un error al guardar el producto'); window.location = '/producto'</script>")
-          
-        }else{
+      if (!error) {
+        console.log("datos insertados")
+        return res.send("<script>alert('Producto registrado exitosamente'); window.location = '/producto'</script>")
+      }else{
 
-          return res.send("<script>alert('Producto registrado exitosamente'); window.location = '/producto'</script>")
+        if(error.code == 'SQLITE_CONSTRAINT'){
+          return res.send("<script>alert('Hubo un error al guardar el producto'); window.location = '/producto'</script>")
+  
         }
+      }
+
 
         
       })
@@ -285,7 +287,7 @@ app.post("/register",[
         return res.redirect("/login")
       }else{
 
-        if( error.code == 'SQLITE_CONSTRAINT'){
+        if(error.code == 'SQLITE_CONSTRAINT'){
           return res.send("<script>alert('Este usuario ya existe'); window.location = '/registro'</script>")
   
         }
