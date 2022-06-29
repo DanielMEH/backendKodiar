@@ -9,6 +9,7 @@ const { error, Console } = require("console");
 const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
 const { body,  validationResult  } = require("express-validator")
+const cors = require("cors");
 const app = express()
 const port = 3000;
 const db = new sqlite3.Database("./db/kodiar.db")
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.set("view engine","ejs")
 app.set('views',path.join(__dirname,'views'))
 app.use(express.static(path.join(__dirname, "/public")))
+app.use(cors())
 const timeEXp = 1000 * 60 * 60 * 24;
 app.use(sessions({
   secret: "rfghf66a76ythggi87au7td",
