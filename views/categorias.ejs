@@ -67,10 +67,14 @@
     <% if(data.length) {  %>
 
         <% for(let i = 0; i < data.length; i++){ %>
-
-            <h1><%=  data[i].nombre %></h1>
-            
-          
+            <section class="menu_categoria bebes">
+                <div class="categoria">
+                <h2><%=  data[i].nombre %></h2>
+                </div>
+                <div class="link_product">
+                    <a href="/inventario">Ver producto <i class="fa-solid fa-angle-right"></i></a>
+                </div>
+            </section>         
             <% } %>
 
         <% }else{ %>
@@ -79,14 +83,7 @@
        <% } %>
     
 
-    <section class="menu_categoria bebes">
-        <div class="categoria">
-        <h2>Bebés</h2>
-        </div>
-        <div class="link_product">
-            <a href="">Ver producto <i class="fa-solid fa-angle-right"></i></a>
-        </div>
-    </section>
+   
 
     
 
@@ -95,7 +92,6 @@
     
     </main>
 
-    <div class="plus"><i class="fa-solid fa-plus"></i></div>
     
 </body>
 </html>

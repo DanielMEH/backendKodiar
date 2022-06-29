@@ -12,7 +12,7 @@ const { body,  validationResult  } = require("express-validator")
 const app = express()
 const port = 3000;
 const db = new sqlite3.Database("./db/kodiar.db")
-// ? Settigs
+// ? Settings
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.set("view engine","ejs")
@@ -68,7 +68,7 @@ app.get('/inventario', (req, res) => {
      },(error,rows)=>{
       if (error) {
         
-        return res.status(501).send("hubo un error")
+        return res.status(501).send("<script>alert('Hubo un error'); window.location = '/'</script>")
         
       }else{
         return res.status(200).render("inventario",{data:rows})
@@ -78,7 +78,8 @@ app.get('/inventario', (req, res) => {
   
   }else{
 
-    
+    return res.status(501).send("<script>alert('No hay una cuenta iniciada'); window.location = '/login'</script>")
+
    
   }
 });
@@ -134,8 +135,9 @@ app.get("/producto", (req,res)=>{
      
       if(error){
         console.log(error)
-        
-        return res.send("Hubo un error al cargar los datos",error)
+    
+        return res.status(501).send("<script>alert('Hubo un error al cargar los datos'); window.location = '/'</script>")
+
         
       }
       return res.render("product", {data:rows})
@@ -153,17 +155,46 @@ app.get("/producto", (req,res)=>{
 app.post("/compra/:id",(req,res)=>{
 
    const { id } = req.params;
-   const update = req.body;
-  console.log(req.body,req.params);
-  db.run(`UPDATE producto SET  unidades = ?  WHERE id = ?`,[req.body.cantidad,req.body.searchcode],
-  (error)=>{
-    if(error){
-     
-      console.log(error)
-      return res.send("Hubo un error al cargar los datos")
-      
+  //  const {searchName,searchcode, cantidad, totalPagar, pagoTotal, cabioPagar} = req.body;
+  //  console.log(searchName,parseInt(searchcode), parseInt(cantidad), parseInt(totalPagar), parseInt(pagoTotal), parseInt(cabioPagar) )
+  
+  
+  db.get("SELECT * FROM producto WHERE id =$id",{
+    $id:req.body.searchcode
+    
+
+  },(error,rows)=>{
+
+   if (!error) {
+    let unidad = req.body.cantidad;
+    let conUnidad = parseInt(unidad)
+    let rowUnidades = rows.unidades;
+
+    let restarUnidad = rowUnidades - conUnidad
+   
+
+    if (rowUnidades < unidad) {
+      return res.status(500).send("<script>alert('No hay suficienes unidades'); window.location = '/dasboard'</script>")
     }
-    return res.send("Los datos se actualizaron")
+    
+    // db.run(`INSERT INTO RegistroCompra(nombre, precio,codigo, categoria, iduser, data) VALUES(?, ?, ?, ?, ?, ?)`,
+    // [req])
+
+    db.run(`UPDATE producto SET unidades = ?  WHERE id = ?`,[restarUnidad,req.body.searchcode],
+    (error)=>{
+      if(error){
+       
+        console.log(error)
+        return res.send("Hubo un error al cargar los datos")
+        
+      }
+      return res.status(200).send("<script>alert('Los datos se actualizaron'); window.location = '/dasboard'</script>")
+     
+    })
+   }else{
+    return res.status(200).send("<script>alert('error en los datos'); window.location = '/dasboard'</script>")
+   }
+
   })
 
 
@@ -241,7 +272,7 @@ app.post("/producto",[
       }else{
 
         if(error.code == 'SQLITE_CONSTRAINT'){
-          return res.send("<script>alert('Hubo un error al guardar el producto'); window.location = '/producto'</script>")
+          return res.send("<script>alert('El codigo del producto ya existe'); window.location = '/producto'</script>")
   
         }
       }
@@ -291,7 +322,45 @@ app.post("/register",[
     [documento,nombre,correo,hash], async(error, rows)=>{
 
       if (!error) {
-        console.log("datos insertados")
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            auth: {
+                user: 'kodiardevelopers@gmail.com',
+                pass: 'jwemqhzrqmekfksx'
+            }
+          });
+          
+          // send email
+          await  transporter.sendMail({
+            from: 'kodiardevelopers@gmail.com',
+            to: correo,
+            subject: 'Test Email Subject',
+            html: ` <div class="container" style="width:480px;
+            margin:auto;">
+             <div style="border: 5px solid #1aa7f8;
+             padding: 10px;
+             border-radius: 3px;
+             font-family: 'Roboto', sans-serif;
+             display:flex;
+             flex-direction: column;
+             align-items: center;
+             border-radius: 10px;
+             ">
+           <div class="logo">
+             <img src="https://res.cloudinary.com/dkqp3wkbi/image/upload/v1656466485/kodiarLogo/logokodiar_bg3auh.png" alt="kodiar">
+           </div>
+           <div class="text">
+             <h2 style="text-align:center ;">¡Hola, daniel Bienvenido a Kodiar</h2>
+             <p style="text-align:center; display: block;">Kodiar es una aplicación de administración para el inventario de los productos de tu negocio , en la cual podras llevar un control permanente de todos ellos, necesidades de abastecimiento, reporte de vencimientos, rotación de productos y podras utilizarla para el manejo administrativo y financiero de tu negocio.</p>
+           </div>
+         
+         </div>
+         </div>
+            </div>`,
+          }).then((res) =>{
+            console.log(res)
+          }).catch((err) =>{console.log("Error",err)});
         return res.redirect("/login")
       }else{
 
@@ -300,29 +369,6 @@ app.post("/register",[
   
         }
       }
-      
-       
-
-     
-
-      // const transporter = nodemailer.createTransport({
-      //   host: 'smtp.gmail.com',
-      //   port: 587,
-      //   auth: {
-      //       user: 'kodiarenterprese@gmail.com',
-      //       pass: 'xbpuhsbnccyfspgk'
-      //   }
-      // });
-      
-      // // send email
-      // await  transporter.sendMail({
-      //   from: 'kodiarenterprese@gmail.com',
-      //   to: correo,
-      //   subject: 'Test Email Subject',
-      //   html: 'hola bienbenido',
-      // }).then((res) =>{
-      //   console.log(res)
-      // }).catch((err) =>{console.log("Error",err)});
 
       })
     }
