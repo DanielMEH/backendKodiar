@@ -59,6 +59,18 @@
         
       </form>
     </div>
+    <style>
+        .link_product{
+
+            display: flex;
+    
+        }
+        .red{
+
+            background: red;
+            
+        }
+    </style>
 
     <main  class="container_categoria">
         <div class="title_main">Categorias</div>
@@ -72,7 +84,9 @@
                 <h2><%=  data[i].nombre %></h2>
                 </div>
                 <div class="link_product">
-                    <a href="/inventario">Ver producto <i class="fa-solid fa-angle-right"></i></a>
+                    <a style="background: #1aa7f8; padding: 5px;" href="/inventario">Ver producto <i class="fa-solid fa-angle-right"></i></a>
+                    <a style="background: red; padding: 5px;" href="/deletecategoria/<%=  data[i].id_categoria %>">Eliminar categoria<i class="fa-solid fa-angle-right"></i></a>
+
                 </div>
             </section>         
             <% } %>

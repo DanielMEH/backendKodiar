@@ -43,35 +43,13 @@
  }
 
 
-.despensa{
-    background-image: linear-gradient(90deg,#74747463,#75757565),url("../categorias/image/2011.i003.013_shopping\ bag\ basket\ zero\ waste\ eco\ illustration.jpg");
-    background-size: cover;
-
-}
-
 .bebes{
     background-image: linear-gradient(90deg,#74747463,#75757565),url("/image/2112.q712.005.F.m009.c5.toy\ store\ composition\ set\ flat.jpg");
     background-size: cover;
     background-position: center center;
 
 }
-.mascotas{
-    background-image: linear-gradient(90deg,#74747463,#75757565),url("/image/mascotas.jpg");
-    background-size: cover;
-    background-position: center center;
-}
 
-.bebidas{
-    background-image: linear-gradient(90deg,#74747463,#75757565),url("/image/bebivas.jpg");
-    background-size: cover;
-    background-position: center center;
-}
-
-.cuidado_personal{
-background-image: linear-gradient(90deg,#74747463,#75757565),url("/image/cuidadopersonal.jpg");
-background-size: cover;
-background-position: center center;
-}
 
 .limpieza{
     background-image: linear-gradient(90deg,#74747463,#75757565),url("/image/limpieza.jpg");
@@ -98,8 +76,12 @@ background-position: center center;
 }
 .link_product{
     padding: 0.10rem;
-    background: #1aa7f8;
+    
     transition: all .2s ease-out;
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
 }
 .link_product a i{
     
@@ -109,7 +91,7 @@ background-position: center center;
 }
 
 .link_product a{
-    background: #1aa7f8;
+    
     width: 100%;
     display: block;
     padding: 0.50rem 0rem;
@@ -123,7 +105,7 @@ background-position: center center;
 }
 .link_product:hover{
 
-    background: #3fb7fd;
+    
 }
 
 .plus i{

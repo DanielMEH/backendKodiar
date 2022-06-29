@@ -475,7 +475,29 @@ app.get("/logout",(req,res)=>{
     res.redirect("/")
   }
 })
+app.get("/deletecategoria/:id",(req,res)=>{
+   
 
+  db.run("DELETE FROM categoria WHERE id_categoria = ?",[req.params.id],(error,rows)=>{
+    if (!error) {
+      res.send("<script>alert('Categoria eliminada exitosamente'); window.location = '/categoria'</script>")
+      console.log(error);
+      
+    }else{
+      return  res.send("<script>alert('La categoria no se elimino vuelva a intentarlo'); window.location = '/categoria'</script>")
+      
+    }
+
+  })
+
+
+
+})
+app.get("/editProduct/:id",(req,res)=>{
+
+  res.render("editProduct")
+
+})
 app.get("/contactanos",(req,res)=>{
 
   res.render("contactanos")
