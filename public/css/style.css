@@ -32,7 +32,7 @@ body{
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0.67rem;
+    
 }
 .nav_link{
     display: flex;
@@ -278,7 +278,7 @@ body{
     -moz-border-radius: 6px;
     -ms-border-radius: 6px;
     -o-border-radius: 6px;
-    width: 100%;
+
   
 }
 
@@ -287,7 +287,7 @@ body{
     flex-direction: column;
     justify-content: start;
     box-shadow: 0px 0px 10px 0px #ccc;
-    margin-right: 20px;
+    
     border-radius: 10px;
     overflow-y: scroll;
     -webkit-border-radius: 10px;
@@ -318,6 +318,6 @@ body{
     
 }
 .xfc{
-    ma
+    margin: 10px;
     
 }

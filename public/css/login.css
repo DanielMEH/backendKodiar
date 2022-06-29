@@ -10,7 +10,7 @@
     --color-text:#1aa7f8;
 }
 body{
-    background: #f0efef;
+   background: #f9f9f9;
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
@@ -24,7 +24,7 @@ body{
 
 .container_d{
     position: relative;
-    background-color:rgba(255, 255, 255, 0.457);
+    background: #fff;
     backdrop-filter: blur(2px);
     
     z-index: 200;

@@ -8,9 +8,11 @@
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://kit.fontawesome.com/fa98a09714.js" crossorigin="anonymous"></script>
     <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="shortcut icon" href="https://res.cloudinary.com/dkqp3wkbi/image/upload/v1656465864/kodiarLogo/logo_ytlecr.png" type="image/x-icon">
+
     <script defer src="/js/index.js"></script>
   
-    <title>KODIAR | Enterprise</title>
+    <title>kodiar </title>
 </head>
 <body> 
     <style>
@@ -33,7 +35,7 @@
  
     <header class="container">
         <div class="container_hero">
-            <div class="title">kodiar</div>
+            <div class="title"><img src="https://res.cloudinary.com/dkqp3wkbi/image/upload/v1656466485/kodiarLogo/logokodiar_bg3auh.png" alt="kodiar"></div>
         <div class="navegate">
             <nav class="nav_link">
                 <ul class="list">
@@ -59,16 +61,16 @@
 
     <main class="main_container todora animate__animated  animate__zoomIn">
         <div class="contendedor_salida">
-            <form action="">
+            <form action="/compra/<%= userUser.correo %> " method="post">
                 <div class="porduct_salida">
                    <div class="first_ca">
                     <div class="label_ca">
-                        <label for="search_ca" class="control-label">Codigo del producto</label>
+                        <label for="search_ca" class="control-label">Nombre del producto</label>
                     </div>
                     <div class="input-type_ca">
                         <div class="input_icon"><i class="fa-solid fa-magnifying-glass"></i></div>
                         <div class="input_salida">
-                            <input type="search" name="search_ca " id="searchInput" autocomplete="off" class="jxrg"
+                            <input type="text" name="searchName" id="searchInput" autocomplete="off" class="jxrg"
                             placeholder="Codigo producto..." >
                         </div>
                     </div>
@@ -79,13 +81,13 @@
                             <div class="input-typea_ca">
                                 <div class="label_ca">
                                     <label for="search"
-                                    class="control-label">Nombre del producto</label>
+                                    class="control-label">Codigo del producto</label>
                                 </div>
                                <div class="input-type_ca">
                                 <div class="input_icon">
                                     <i class="fa-solid fa-magnifying-glass"></i></div>
                                 <div class="input_salida">
-                                    <input type="search" name="search" id="search" autocomplete="off" 
+                                    <input type="search" name="searchcode" id="searchCode" autocomplete="off" 
                                     class="jxrg" placeholder="Nombre del producto..."/>
                                 </div>
                                </div>
@@ -98,6 +100,7 @@
                                 <div class="input_salida">
                                     <input type="text" name="cantidad" id="cantidad" autocomplete="off" placeholder="Ingrese una cantidad" 
                                     class="xtline">
+                                   
                                 </div>
                             </div>
                         </div>

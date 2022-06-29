@@ -111,10 +111,14 @@ body{
 .list > li > a:hover::before{
     width: 100%;
 }
-.container .title{
-    font-size: 2rem;
-    margin: 0 2rem;
-    font-weight: bold;
+.container_hero{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    
 }
 .notificacion{
   

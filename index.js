@@ -62,9 +62,8 @@ app.get('/inventario', (req, res) => {
   session = req.session;
   if (session.userid) {
     
-    db.all(`SELECT producto.namep, producto.unidades, producto.precioc, producto.preciov, producto.fechaven, producto.descripcion, producto.id_categoria,
-     producto.idUsuario, producto.id, categoria.id_categoria, categoria.nombre, categoria.imagen FROM producto INNER JOIN categoria ON producto.id = categoria.id_categoria
-     WHERE producto.idUsuario=$idemail`,{
+    db.all(`SELECT  * FROM producto
+    WHERE producto.idUsuario=$idemail`,{
       $idemail:session.userid
      },(error,rows)=>{
       if (error) {
@@ -95,7 +94,9 @@ app.get("/buscador",(req,res)=>{
   if (session.userid) {
 
 
-    db.all("SELECT * FROM producto",(err,rows)=>{
+    db.all("SELECT * FROM producto WHERE idUsuario=$user",{
+      $user: session.userid
+    },(err,rows)=>{
       
       if (err) {
         return  res.status(500).redirect("/")
@@ -114,20 +115,7 @@ app.get("/buscador",(req,res)=>{
   }
 
 })
-app.get('/inventario', (req, res) => {
 
-  session = req.session;
-
-  if (session.userid) {
-
-    res.render('inventario');
-
-  }else{
-
-    
-    res.redirect("/")
-  }
-})
 app.get('/registro', (req, res) => {
   res.render('registro');
 })
@@ -159,6 +147,26 @@ app.get("/producto", (req,res)=>{
     
     res.redirect("/")
   }
+
+})
+
+app.post("/compra/:id",(req,res)=>{
+
+   const { id } = req.params;
+   const update = req.body;
+  console.log(req.body,req.params);
+  db.run(`UPDATE producto SET  unidades = ?  WHERE id = ?`,[req.body.cantidad,req.body.searchcode],
+  (error)=>{
+    if(error){
+     
+      console.log(error)
+      return res.send("Hubo un error al cargar los datos")
+      
+    }
+    return res.send("Los datos se actualizaron")
+  })
+
+
 
 })
 
@@ -254,13 +262,13 @@ app.post("/register",[
   body('nombre', 'El nombre no es valido asegurate de que no tenga caracteres especiales y no este vacio')
       .exists()
       .isLength({min:5}),
-  body('documento', 'El documento no es valido asegurate de que tenga mas de 10 numeros y no este vacio')
+  body('documento', 'El documento no es valido asegurate de que tenga mas de 8 numeros y no este vacio')
       .exists()
       .isLength({min:8}),
   body('correo', 'El correo no es valido asegurate de que no este vacio y este bien escrito')
       .exists()
       .isEmail(),
-  body('password', 'la contraseña no es valida')
+  body('password', 'la contraseña no es valida debe tener mas de 5 caracteres')
       .exists()
       .isLength({min:5})
 ],(req,res)=>{
@@ -321,7 +329,6 @@ app.post("/register",[
   
 })
 
-console.log(db)
 app.post('/login',(req,res) =>{
 
   const{ correo, password} =req.body;
@@ -376,17 +383,33 @@ app.post("/categoria", [
     db.run(`INSERT INTO categoria(nombre,imagen,idusuario) VALUES (?, ?, ?)`,
     [nombre, imagen,session.userid],(error,rows)=>{
       if (error) {
-        return  res.send("error")
+        console.log(error);
+        return  res.send("<script>alert('La categoria no se creo vuelva a intentarlo'); window.location = '/categoria'</script>")
        
       }else{
         
-        res.send("<script>alert('Categoria registrada exitosamente'); window.location = '/categoria'</script>")
+        res.send("<script>alert('Categoria creada exitosamente'); window.location = '/categoria'</script>")
       }
   
     })
   }
   
 
+})
+
+app.get("/delete/:id",(req,res)=>{
+
+  db.run(`DELETE FROM producto WHERE id = ?`,[req.params.id],(error,rows)=>{
+    if (error) {
+      console.log(error);
+      return  res.send("<script>alert('La categoria no se elimino vuelva a intentarlo'); window.location = '/inventario'</script>")
+     
+    }else{
+      
+      res.send("<script>alert('Producto eliminado exitosamente'); window.location = '/inventario'</script>")
+    }
+
+  })
 })
 
 app.get("ErrorCategoria.ejs",(req,res)=>{
@@ -422,3 +445,4 @@ app.get("/error",(req,res)=>{
 app.listen(port, (req,res) => {
      console.log("Listening on port",port)
 })
+

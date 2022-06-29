@@ -4,18 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <link rel="stylesheet" href="/css/inventario.css">
     <script src="https://kit.fontawesome.com/fa98a09714.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="shortcut icon" href="https://res.cloudinary.com/dkqp3wkbi/image/upload/v1656465864/kodiarLogo/logo_ytlecr.png" type="image/x-icon">
 
-    <title>KODIAR</title>
+
+    <title>Kodiar</title>
 </head>
 
 <body>
     <header class="container">
         <div class="container_hero">
-            <div class="title">kodiar</div>
+            <div class="title"><img src="https://res.cloudinary.com/dkqp3wkbi/image/upload/v1656466485/kodiarLogo/logokodiar_bg3auh.png" alt="kodiar"></div>
         <div class="navegate">
             <nav class="nav_link">
                 <ul class="list">
@@ -65,13 +68,10 @@
                     <th></th>
                     <th>codigo</th>
                     <th>Producto</th>
-                    <th>categoria</th>
-                    <th>stock inicial</th>
+                    <th>Unidades</th>
                     <th>precio compra</th>
                     <th>precio venta</th>
                     <th>fecha de vencimiento</th>
-                    <th>Vendidos</th>
-                    <th>Productos restantes</th>
                     <th>Ajustes</th>
 
 
@@ -89,17 +89,15 @@
                             <span class="available"></span></td>
                             <td><%= data[inv].id  %></td>
                             <td><%= data[inv].namep  %></td>
-                            <td><%= data[inv].nombre  %></td>
-                            <td>15</td>
+                            <td><%= data[inv].unidades %> </td>
                             <td><%= data[inv].precioc  %></td>
                             <td><%= data[inv].preciov  %></td>
                             <td><%= data[inv].fechaven  %></td>
-                            <td>50</td>
-                            <td>30</td>
+                            
                             <td>
                                <div class="option">
-                                <a href="edit/<%= data[inv].id  %> " class="options"><i class="op1 fa-solid fa-pen-to-square"></i></a>
-                                <a href="" class="options"><i class="op2 fa-solid fa-trash"></i></a>
+                                <a href="/edit/<%= data[inv].id  %> " class="options"><i class="op1 fa-solid fa-pen-to-square"></i></a>
+                                <a href="/delete/<%= data[inv].id  %>" class="options"><i class="op2 fa-solid fa-trash"></i></a>
 
                                </div>
                             </td>

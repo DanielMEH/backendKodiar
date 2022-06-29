@@ -35,17 +35,29 @@ const usersItems = users => users.map(user =>
  <span class="xfc" >Codigo: ${user.id}</span>
  <span class="xfc" >Nombre: ${user.namep}</span>
  <span class="xfc" >Unidades: ${user.unidades}</span>
- <span class="xfc" >Precio ${user.precioc}</span>
+ <span class="xfc" >Precio: ${user.preciov}</span>
  </li> </li>`).join(" ")
 
 
 function renderData(users){
 
   const itemsString =  usersItems(users)
-  usersList.innerHTML= itemsString
+  if (itemsString.length === 0) {
+      usersList.innerHTML = `<h4 style="margin:10px;">No se encontro ningun resultado asegurate de el 
+      producto este en el inventario</h4>`;
+   }else{
+      usersList.innerHTML = itemsString
+
+   }
+  
+  }
+
+  let nameCode = document.querySelector("#searchCode");
+  let cantidad = document.querySelector("#cantidad");
+  console.log(nameCode)
+  console.log(cantidad)
 
 
-}
 
 // async function productData(){
 
