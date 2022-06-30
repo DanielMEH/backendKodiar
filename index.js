@@ -131,7 +131,7 @@ app.get("/producto", (req,res)=>{
  
   if (session.userid) {
 
-    db.all(`SELECT * FROM  categoria WHERE idusuario =$email`,{
+    db.all(`SELECT * FROM  categoria  WHERE idusuario =$email`,{
       $email:session.userid
     },(error, rows)=>{
      
@@ -207,7 +207,7 @@ app.get("/categoria",(req,res)=>{
 
   session = req.session;
 
-  db.all(`SELECT * FROM categoria WHERE idusuario=$email`,{
+  db.all(`SELECT * FROM categoria  WHERE idusuario=$email`,{
     $email:session.userid
   },(error, rows)=>{
     
@@ -269,7 +269,6 @@ app.post("/producto",[
         precioCompra,precioVenta,fechaVencimiento,mensaje,id_categoria,session.userid],(error,rows)=>{
 
       if (!error) {
-        console.log("datos insertados")
         return res.send("<script>alert('Producto registrado exitosamente'); window.location = '/producto'</script>")
       }else{
 
@@ -380,7 +379,7 @@ app.post("/register",[
 app.post('/login',(req,res) =>{
 
   const{ correo, password} =req.body;
-  db.get("SELECT password FROM usuario WHERE correo=$correo",{
+  db.get("SELECT password FROM usuario  WHERE correo=$correo",{
    $correo:correo  
   }, (error, rows)=>{
     if(error){
@@ -449,7 +448,6 @@ app.get("/delete/:id",(req,res)=>{
 
   db.run(`DELETE FROM producto WHERE id = ?`,[req.params.id],(error,rows)=>{
     if (error) {
-      console.log(error);
       return  res.send("<script>alert('La categoria no se elimino vuelva a intentarlo'); window.location = '/inventario'</script>")
      
     }else{
@@ -497,8 +495,37 @@ app.get("/deletecategoria/:id",(req,res)=>{
 })
 app.get("/editProduct/:id",(req,res)=>{
 
-  res.render("editProduct")
+  const {id} = req.params;
+  db.get("SELECT * FROM producto WHERE id = ?",[id],(error,rows)=>{
+    if(!error){
 
+      res.render("editProduct",{data:rows})
+    }else{
+      return  res.send("<script>alert('Error vuelva a intentarlo'); window.location = '/inventario'</script>")
+
+    }
+
+})
+})
+
+app.post("/update/:id",(req,res)=>{
+
+  const actualizar = req.body
+  const {id}= req.params;
+  const idNumber = parseInt(id)
+  db.run(`UPDATE producto SET namep = ?, unidades = ?, precioc = ?, preciov = ?, fechaven = ?,
+   descripcion = ? WHERE id = ?`,[req.body.nombre,req.body.unidades,req.body.pcompra,
+    req.body.pventa,req.body.fechav,req.body.descripcion,idNumber],(error,rows)=>{
+    if (!error) {
+      res.send("<script>alert('Producto actualizado exitosamente'); window.location = '/inventario'</script>")
+    }else{
+      console.log(error);
+      return  res.send("<script>alert('El producto no se actualizo'); window.location = '/inventario'</script>")
+    }
+      
+    
+
+  })
 })
 app.get("/contactanos",(req,res)=>{
 
