@@ -247,8 +247,8 @@ body{
     rgb(217, 46, 46) ;
 }
 .save{
-    background: #0ec344 ;
-    border: 1px solid #0ec344;
+    background: #1aa7f8 ;
+    border: 1px solid #1aa7f8;
     padding: 6px;
     color: white;
     border-radius: 2px;
@@ -257,7 +257,7 @@ body{
     transition: 0.2s ease-out;
 }
 .save:hover{
-    background: #0edf4c ;
+    background:#3eb3f7 ;
 }
 .listSearch{
 
