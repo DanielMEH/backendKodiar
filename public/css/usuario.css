@@ -196,6 +196,7 @@ body{
     padding:20px;
     text-align:center;
     border-bottom:2px solid #1aa7f8 ;
+    font-size: 19px;
 }
 /* .cajas{
     padding:15px 50px;
@@ -215,4 +216,43 @@ body{
 }
 .nombre-des{
     padding:15px 0px;
+}
+.data-perfil .hgty{
+
+    display: block;
+   
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    margin: 1.1rem;
+    padding-bottom: 2px;
+    
+}
+.data-perfil ul{
+
+    width: 100%;
+    display: contents;
+}
+.data-perfil ul li {
+    
+    list-style: none;
+    font-size: 19px;
+    display: flex;
+    border: 1px solid #cacaca;
+    justify-content: start;
+    align-items: center;
+    padding: 9px;
+
+    
+}
+.data-perfil .p-perfil{
+
+    margin-right: 10px;
+}
+.nombre-usuario{
+
+    margin: 4px;
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 19px;
 }

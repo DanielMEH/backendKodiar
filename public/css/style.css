@@ -130,7 +130,7 @@ body{
     box-shadow: 0px 0px 10px .7px rgb(202, 202, 202);
     margin: 7rem auto;
     display: grid;
-    grid-template-columns: 700px auto;
+    grid-template-columns: 650px auto;
     padding: 2rem 0rem 2rem 3rem;
 
 
@@ -211,12 +211,12 @@ body{
 .complete_info{
 
     display: flex;
-    justify-content: center;
+    justify-content: start;
     margin-top: 1rem;
 
 }
 .pagos_list_ca{
-    width: 100%;
+   
 }
 .total_pago ,.pago, .pago_cambio{
 
@@ -228,7 +228,7 @@ body{
 .cancel_pagos_exit{
 
     display:flex;
-    justify-content:center;
+    justify-content:start;
     gap: 1rem;
     margin: 2rem 0rem 0rem 0rem;
 }

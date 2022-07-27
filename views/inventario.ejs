@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/inventario.css">
     <script src="https://kit.fontawesome.com/fa98a09714.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="/datatable/datatables.min.css" />
     <link rel="shortcut icon" href="https://res.cloudinary.com/dkqp3wkbi/image/upload/v1656465864/kodiarLogo/logo_ytlecr.png" type="image/x-icon">
 
 
@@ -40,29 +41,8 @@
 
     </header>
     <div class="datatable-container">
-        <div class="header-tools">
-            <div class="tools">
-                <ul>
-                    <li><span><input type="checkbox"></span></li>
-                    <li>
-                        <button>
-                            <i class="material-icons">edit</i>
-                        </button>
-                    </li>
-                    <li>
-                        <button>
-                            <i class="material-icons">delete</i>
-                        </button>
-                    </li>
-                </ul>
-            </div>
-            <div class="search">
-                <input type="text" name="" id="" class="search-input"
-                placeholder="Buscar...">
-
-            </div>
-        </div>
-        <table class="datatable">
+      
+        <table   id="myTable" class="display">
             <thead>
                 <tr>
                     <th></th>
@@ -131,33 +111,15 @@
       
             </tbody>
         </table>
-        <div class="footer-tools">
-            <div class="list-items">
-               <span  class="span_tittle">Mostrar </span>
-                <select name="n-entries"id="n-enties"class="n-entries">
-                    <option value="15">5</option>
-                    <option value="10"selected>10</option>
-                    <option value="15">15</option>
-                </select>
-                <span class="span_tittle">
-                    Registros
-                </span>
-            </div>
-            <div class="pages">
-                <div class="pages">
-                    <ul>
-                  
-                        <li><button class="active">1</button></li>
-                        <li><button>2</button></li>
-                        <li><button>3</button></li>
-                        <li><span><i class="fas fa-angle-right"></i></span></li>
-                        
-                    </ul>
-</div>
-            </div>
-        </div>
+        
     </div>
-
+<script src="/jquery/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+<script type="text/javascript" src="/datatable/datatables.min.js"></script>
 </body>
 
 </html>

@@ -39,22 +39,27 @@
     <main class="caja-principal">
         <div class="caja2">
             <div class="title-perfil">
-                <h3>PERFIL</h3>
+                <h3>p-perfil</h3>
             </div>
             <div class="imagen">
                 <img class="imagen2" src="/image/avatar.jpg" alt="avatar">
-                <p class="nombre">LAURA BAUTISTA</p>
+                <p class="nombre-usuario" ><%= userPerfil.nombre %> </p>
             </div>
-            <div class="text-datos">
-                <a  href="">PERFIL</a>
-            </div>
-            <div class="datos2">
-                <a  href="">INFORMACION PERSONAL</a>
+            <div class="data-perfil">
+                <span class="hgty">Mis datos</span>
+                <ul>
+                    <li><span class="p-perfil">Nombre: </span> <%= userPerfil.nombre %></li>
+                    <li><span class="p-perfil"> Documento: </span> <%= userPerfil.documento %></li>
+                    <li><span class="p-perfil">Correo: </span> <%= userPerfil.correo %></li>
+                    <li><span class="p-perfil">Telefono: </span> <%= userPerfil.telefono == null ? "Agregar un telefono": userPerfil.telefono %></li>
+                     <li><span class="p-perfil">Descripcion: </span> <%= userPerfil.telefono==null ? "Agregar una descripcion" : userPerfil.descripcion %></li>
+
+                </ul>
             </div>
             </div>
         
         <div class="caja3">
-            <div class="info">INFORMACION PERSONAL</div>
+            <div class="info">  Actualizar información </div>
 <div class="rrrr">
     <div class="ty">
         <div class="cajas">
