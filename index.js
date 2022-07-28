@@ -501,6 +501,42 @@ app.post(
   }
 );
 
+app.post("/perfilUpdate/:idDocumento", (req, res) => {
+  const { nombre, documento, telefono, imagen, descripcion } = req.body;
+  db.get(
+    "SELECT * FROM usuario WHERE documento = ?",
+    [req.params.idDocumento],
+    (error, rows) => {
+      if (!error) {
+        db.run(
+          "UPDATE usuario SET documento = ?, nombre = ?,  telefono = ?, descripcion = ?, avatar = ?   WHERE documento = ?",
+          [
+            documento,
+            nombre,
+            telefono,
+            descripcion,
+            imagen,
+            req.params.idDocumento,
+          ],
+          (error, rows) => {
+            if (!error) {
+              return res.redirect("/cuenta");
+            } else {
+              console.log(error);
+              return res.send(
+                "<script>alert('No se pudo actualizar'); window.location = '/cuenta'</script>"
+              );
+            }
+          }
+        );
+      } else {
+        console.log(rows);
+      }
+    }
+  );
+});
+//[console.log(req.params, req.body);
+
 app.get("/delete/:id", (req, res) => {
   db.run(
     `DELETE FROM producto WHERE id = ?`,

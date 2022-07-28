@@ -49,7 +49,10 @@ body{
     backdrop-filter: blur(2px);
     z-index: 200;
 }
+.image{
 
+    width: 100px;
+}
 .container_hero{
 
     display: flex;
@@ -57,7 +60,7 @@ body{
     justify-content: space-between;
     max-width: 1600px;
     margin: 0 auto;
-    padding: 0.67rem;
+   
 }
 .nav_link{
     display: flex;

@@ -19,9 +19,11 @@
         <div class="navegate">
             <nav class="nav_link">
                 <ul class="list">
-                    <div class="notificacion">
+                    <!-- 
+                        <div class="notificacion">
                         <i class="fa-solid fa-bell"></i>
                     </div>
+                     -->
                     <li>
                         <a  href="/dasboard">Inicio</a></li>
                             <li><a href="/inventario">Inventario</a></li>
@@ -39,7 +41,7 @@
     <main class="caja-principal">
         <div class="caja2">
             <div class="title-perfil">
-                <h3>p-perfil</h3>
+                <h3>perfil</h3>
             </div>
             <div class="imagen">
                 <img class="imagen2" src="/image/avatar.jpg" alt="avatar">
@@ -52,7 +54,7 @@
                     <li><span class="p-perfil"> Documento: </span> <%= userPerfil.documento %></li>
                     <li><span class="p-perfil">Correo: </span> <%= userPerfil.correo %></li>
                     <li><span class="p-perfil">Telefono: </span> <%= userPerfil.telefono == null ? "Agregar un telefono": userPerfil.telefono %></li>
-                     <li><span class="p-perfil">Descripcion: </span> <%= userPerfil.telefono==null ? "Agregar una descripcion" : userPerfil.descripcion %></li>
+                     <li><span class="p-perfil">Descripcion: </span> <%= userPerfil.descripcion ==null ? "Agregar una descripcion" : userPerfil.descripcion %></li>
 
                 </ul>
             </div>
@@ -60,37 +62,48 @@
         
         <div class="caja3">
             <div class="info">  Actualizar información </div>
-<div class="rrrr">
-    <div class="ty">
-        <div class="cajas">
-         <p class="nombre-cajas">Nombre</p>
-        <input type="text" name="nombre" id="nombre" >
-    </div>
-    <div class="cajas">
-        <p class="nombre-cajas">Documento</p>
-       <input type="number" name="documento" id="documento" >
-    </div>
-    <div class="cajas">
-    <p class="nombre-cajas">Telefono</p>
-    <input type="number" name="telefono" id="telefono" >
-    </div>
-    <div class="cajas">
-    <p class="nombre-cajas">Direccion</p>
-    <input type="text" name="direccion" id="direccion" >
+<form action="/perfilUpdate/<%= userPerfil.documento%> " method="post" enctype="application/x-www-form-urlencoded" >
+
+    <div class="rrrr">
+        <div class="ty">
+            <div class="cajas">
+                <label class="nombre-cajas">Nombre:</label>
+                <input type="text" name="nombre" id="nombre"
+                value=" <%= userPerfil.nombre %>">
+            </div>
+            <div class="cajas">
+                <label class="nombre-cajas">Documento:</label>
+                <input type="number" name="documento" id="documento"
+                value="<%= userPerfil.documento %>">
+            </div>
+            <div class="cajas">
+                <label class="nombre-cajas">Telefono:</label>
+                <input type="number" name="telefono" id="telefono"
+                value="<%= userPerfil.telefono %>">
+            </div>
+         
+    
+            <div class="cajas">
+                <label class="nombre-cajas">Foto:</label>
+                <div class="image-perfil">
+                    <p>Subir imagen <i class="fa-solid fa-upload"></i></p>
+                <input type="file" name="imagen" id="direccion">
+                </div>
+            </div>
+            <div class="enviar">
+                <button>Guardar información</button>
+            </div>
+        </div>
+    
+        <div class="descripcion">
+            <p class="nombre-des">Descripcion: </p>
+            <textarea name="descripcion" id="" cols="30" rows="10" class="description"
+            value="<%= userPerfil.descripcion %> "></textarea>
+    
+        </div>
     </div>
     
-    <div class="cajas">
-    <p class="nombre-cajas">Foto</p>
-    <input type="File" name="direccion" id="direccion" >
-    </div>
-    </div>
-    
-    <div class="descripcion">
-        <p class="nombre-des">Descripcion</p>
-     <textarea name="" id="" cols="30" rows="10"></textarea>
-    
-    </div>
-</div>
+</form>
         </div>
     </div>
     </main>

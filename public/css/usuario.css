@@ -32,7 +32,7 @@ body{
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0.67rem;
+   
 }
 .nav_link{
     display: flex;
@@ -202,12 +202,82 @@ body{
     padding:15px 50px;
 } */
 .nombre-cajas{
-    padding:15px 0px;
+    padding: 10px 0px;
+}
+.ty input{
+    padding: 6px;
+    border: none;
+    border: 2px solid #b5b5b5;
+    outline: none;
+    width: 300px;
+    border-radius: 4px;
+
+}
+.description{
+    padding: 6px;
+    border: none;
+    border: 2px solid #b5b5b5;
+    outline: none;
+    border-radius: 4px;
+}
+.description:focus{
+    border: 2px solid #1aa7f8;
+}
+.ty input:focus{
+    border: 2px solid #1aa7f8;
+}
+.image-perfil{
+    background: #e6e6e6;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+}
+.image-perfil p {
+
+    color: #010a2b;
+    text-align: center;
+    margin: 10px;
+    cursor: pointer;
+
+}
+.ty input[type="file"]{
+    padding: 4px;
+    border: none;
+    outline: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+
+}
+.enviar button {
+
+    background: #1aa7f8;
+    border:  1px solid #1aa7f8;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    margin: 10px 0px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
 }
 .rrrr{
     display: flex;
     justify-content:space-around;
     margin:40px
+
+}
+.cajas{
+    display: flex;
+    flex-direction: column;
+    
 
 }
 .caja-des{
